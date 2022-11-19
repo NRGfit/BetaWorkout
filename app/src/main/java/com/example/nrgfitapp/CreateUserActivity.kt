@@ -32,11 +32,10 @@ class CreateUserActivity : AppCompatActivity() {
     private fun signUpUser(name: String, username: String, password: String, email: String){
         val user = ParseUser()
 
-        //user.add("name", name)
+        user.put("name", name)
         user.username = username
         user.setPassword(password)
         user.email = email
-
 
         user.signUpInBackground { e->
             if(e == null){
