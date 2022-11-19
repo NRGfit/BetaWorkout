@@ -27,30 +27,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.signUpButton).setOnClickListener{
-            val username = findViewById<EditText>(R.id.login_username).text.toString()
-            val password = findViewById<EditText>(R.id.login_password).text.toString()
-
-            signUpUser(username, password)
+            goToCreateUserActivity()
         }
     }
 
-    private fun signUpUser(username: String, password: String){
-        val user = ParseUser()
 
-        user.username = username
-        user.setPassword(password)
-
-        user.signUpInBackground { e->
-            if(e == null){
-                Log.i(TAG, "Successfully signed up")
-                goToMainActivity()
-
-            }else{
-                e.printStackTrace()
-                Toast.makeText(this, "Error Signing Up", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
     private fun loginUser(username: String, password: String){
         ParseUser.logInInBackground(username, password, ({user, e->
@@ -70,4 +51,11 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    private fun goToCreateUserActivity() {
+        val intent = Intent(this@LoginActivity, CreateUserActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 }
