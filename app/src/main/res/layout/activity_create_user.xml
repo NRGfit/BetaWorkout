@@ -4,7 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateUserActivity">
+    tools:context=".CreateUserActivity"
+    android:background="@drawable/gradient">
+
+    <Button
+        android:id="@+id/bt_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="188dp"
+        android:backgroundTint="#2196F3"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email"
+        app:layout_constraintVertical_bias="0.05" />
 
     <EditText
         android:id="@+id/tv_name"
@@ -14,6 +30,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Name"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +45,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Username"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
@@ -39,6 +59,8 @@
         android:ems="10"
         android:inputType="textPassword"
         android:hint="Password"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +74,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Email"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_password" />
@@ -60,9 +84,27 @@
         android:id="@+id/bt_createUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#2196F3"
+
         android:text="Create Account"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+
+    <TextView
+        android:id="@+id/SIGNUP"
+        android:layout_width="192dp"
+        android:layout_height="72dp"
+        android:text="SIGN UP"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

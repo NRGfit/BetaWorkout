@@ -26,7 +26,9 @@ class CreateUserActivity : AppCompatActivity() {
             signUpUser(name, username, password, email)
         }
 
-
+        findViewById<Button>(R.id.bt_back).setOnClickListener{
+            goToLoginActivity()
+        }
     }
 
     private fun signUpUser(name: String, username: String, password: String, email: String){
@@ -51,6 +53,12 @@ class CreateUserActivity : AppCompatActivity() {
 
     private fun goToMainActivity() {
         val intent = Intent(this@CreateUserActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToLoginActivity() {
+        val intent = Intent(this@CreateUserActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
