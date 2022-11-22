@@ -217,3 +217,11 @@ Networking
    * (Read/GET) Query name
    * (Update/PUT)/ (Create/POST) Update/ Create user profile image
 
+Sprint Week 1
+
+<img src='NRGfitSprintWeek1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+- [x] Create Parse Database
+- [x] Create Login Screen
+- [x] Allow Users to Create Accounts
+- [x] UI Adjustments
