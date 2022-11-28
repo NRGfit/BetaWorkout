@@ -9,8 +9,8 @@ import com.parse.ParseObject
 import com.parse.ParseUser
 import java.util.*
 
-@ParseClassName("Post")
-class Post : ParseObject() {
+@ParseClassName("Posts")
+class Posts : ParseObject() {
 
     fun getDescription(): String? {
         return getString(KEY_DESCRIPTION)
@@ -37,8 +37,8 @@ class Post : ParseObject() {
         return TimeFormatter.getTimeDifference(createdAt.toString())
     }
     companion object {
-        const val KEY_DESCRIPTION = "Description"
+        const val KEY_DESCRIPTION = "description"
         const val KEY_IMAGE = "Image"
-        const val KEY_USER = "User"
+        const val KEY_USER = "username"
     }
 }

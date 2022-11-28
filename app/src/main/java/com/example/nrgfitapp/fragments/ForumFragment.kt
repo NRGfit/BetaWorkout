@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.nrgfitapp.DAOs.Post
+import com.example.nrgfitapp.DAOs.Posts
 import com.example.nrgfitapp.DAOs.PostAdapter
 import com.example.nrgfitapp.R
 import com.parse.FindCallback
@@ -20,7 +20,7 @@ lateinit var rvPosts: RecyclerView
 lateinit var adapter: PostAdapter
 lateinit var swipeContainer: SwipeRefreshLayout
 
-var allPosts: MutableList<Post> = mutableListOf()
+var allPosts: MutableList<Posts> = mutableListOf()
 
 open class HomeFragment : Fragment() {
     val TAG = "ForumFragment"
@@ -50,10 +50,10 @@ open class HomeFragment : Fragment() {
     }
 
     open fun queryPosts() {
-        val query: ParseQuery<Post> = ParseQuery.getQuery(Post::class.java)
-        query.include(Post.KEY_USER)
-        query.findInBackground(object : FindCallback<Post> {
-            override fun done(posts: MutableList<Post>?, e: ParseException?) {
+        val query: ParseQuery<Posts> = ParseQuery.getQuery(Posts::class.java)
+        query.include(Posts.KEY_USER)
+        query.findInBackground(object : FindCallback<Posts> {
+            override fun done(posts: MutableList<Posts>?, e: ParseException?) {
                 if(e != null){
                     e.printStackTrace()
                     Log.e(TAG, "Error fetching posts")

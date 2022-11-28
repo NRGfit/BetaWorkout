@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nrgfitapp.R
 
-class PostAdapter(val context: Context, val posts: List<Post>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+class PostAdapter(val context: Context, val posts: List<Posts>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false)
@@ -39,7 +39,7 @@ class PostAdapter(val context: Context, val posts: List<Post>) : RecyclerView.Ad
             itemCreatedAt = itemView.findViewById(R.id.tvDate)
         }
 
-        fun bind(post: Post){
+        fun bind(post: Posts){
             tvUsername.text = post.getUser()?.username
             tvDescription.text = post.getDescription()
             itemCreatedAt.text = post.getFormattedTimestamp(post.createdAt)
