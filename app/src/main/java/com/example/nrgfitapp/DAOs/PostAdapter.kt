@@ -28,13 +28,13 @@ class PostAdapter(val context: Context, val posts: List<Posts>) : RecyclerView.A
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvUsername: TextView
-        val ivImage: ImageView
+        val ivProfilePic: ImageView
         val tvDescription: TextView
         val itemCreatedAt: TextView
 
         init{
             tvUsername = itemView.findViewById(R.id.tvUsername)
-            ivImage = itemView.findViewById(R.id.ivImage)
+            ivProfilePic = itemView.findViewById(R.id.ivProfilePic)
             tvDescription = itemView.findViewById(R.id.description)
             itemCreatedAt = itemView.findViewById(R.id.tvDate)
         }
@@ -44,7 +44,7 @@ class PostAdapter(val context: Context, val posts: List<Posts>) : RecyclerView.A
             tvDescription.text = post.getDescription()
             itemCreatedAt.text = post.getFormattedTimestamp(post.createdAt)
 
-            Glide.with(itemView.context).load(post.getImage()?.url).into(ivImage)
+            Glide.with(itemView.context).load(post.getUser()?.getParseFile("pfp")?.url).into(ivProfilePic)
         }
     }
 }
