@@ -7,9 +7,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.nrgfitapp.fragments.ForumFragment
+import com.example.nrgfitapp.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.parse.*
-import com.example.nrgfitapp.fragments.HomeFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,17 +29,17 @@ class MainActivity : AppCompatActivity() {
             var fragmentToShow: Fragment? =null
             when(item.itemId){
                 R.id.action_forum -> {
-                    fragmentToShow = HomeFragment()
+                    fragmentToShow = ForumFragment()
                     Toast.makeText(this, "Forum", Toast.LENGTH_SHORT).show()
                 }
 //                R.id.action_compose -> {
 //                    fragmentToShow = ComposeFragment()
 //                    //Toast.makeText(this, "Compose", Toast.LENGTH_SHORT).show()
 //                }
-//                R.id.action_profile -> {
-//                    fragmentToShow = ProfileFragment()
-//                    //Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
-//                }
+                R.id.action_profile -> {
+                    fragmentToShow = ProfileFragment()
+                    //Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+                }
             }
 
             if(fragmentToShow != null) {

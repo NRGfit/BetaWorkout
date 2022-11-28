@@ -23,7 +23,7 @@ import com.parse.ParseQuery
 
 
 
-open class HomeFragment : Fragment() {
+open class ForumFragment : Fragment() {
 
     lateinit var rvPosts: RecyclerView
     lateinit var adapter: PostAdapter
