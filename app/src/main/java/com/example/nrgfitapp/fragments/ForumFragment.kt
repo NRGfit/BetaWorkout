@@ -86,6 +86,7 @@ open class ForumFragment : Fragment() {
     open fun queryPosts() {
         val query: ParseQuery<Posts> = ParseQuery.getQuery(Posts::class.java)
         query.include(Posts.KEY_USER)
+        query.addDescendingOrder("createdAt")
         query.findInBackground(object : FindCallback<Posts> {
             override fun done(posts: MutableList<Posts>?, e: ParseException?) {
                 if(e != null){
