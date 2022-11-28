@@ -1,5 +1,7 @@
 package com.example.nrgfitapp.fragments
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,28 +11,30 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.nrgfitapp.ComposeActivity
 import com.example.nrgfitapp.DAOs.Posts
 import com.example.nrgfitapp.DAOs.PostAdapter
 import com.example.nrgfitapp.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.parse.FindCallback
 import com.parse.ParseException
 import com.parse.ParseQuery
 
-lateinit var rvPosts: RecyclerView
-lateinit var adapter: PostAdapter
-lateinit var swipeContainer: SwipeRefreshLayout
 
-var allPosts: MutableList<Posts> = mutableListOf()
+
 
 open class HomeFragment : Fragment() {
-    val TAG = "ForumFragment"
-    override fun onCreateView(
-        btFab = findViewById(R.id.btFab)
 
-                btFab.setOnClickListener {
-            val intent = Intent(this, ComposeActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE)
-        }
+    lateinit var rvPosts: RecyclerView
+    lateinit var adapter: PostAdapter
+    lateinit var swipeContainer: SwipeRefreshLayout
+    lateinit var btFab: FloatingActionButton
+    var allPosts: MutableList<Posts> = mutableListOf()
+
+    val TAG = "ForumFragment"
+    var REQUEST_CODE = 10;
+
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -49,6 +53,20 @@ open class HomeFragment : Fragment() {
             queryPosts()
         }
 
+        swipeContainer.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light
+        );
+
+        btFab = view.findViewById(R.id.createPost)
+
+        btFab.setOnClickListener {
+            val intent = Intent(this.context, ComposeActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
+
         adapter = PostAdapter(requireContext(), allPosts)
         rvPosts.adapter = adapter
         rvPosts.layoutManager = LinearLayoutManager(requireContext())
@@ -57,12 +75,7 @@ open class HomeFragment : Fragment() {
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == RESULT_OK && requestCode == REQUEST_CODE){
-            val tweet = data?.getParcelableExtra("tweet") as Tweet
 
-            tweets.add(0, tweet)
-
-            adapter.notifyItemInserted(0)
-            rvTweets.smoothScrollToPosition(0)
         }
 
         super.onActivityResult(requestCode, resultCode, data)

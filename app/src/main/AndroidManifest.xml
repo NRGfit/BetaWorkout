@@ -45,6 +45,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".ComposeActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.parse.SERVER_URL"
