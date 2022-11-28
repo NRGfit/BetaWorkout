@@ -25,9 +25,16 @@ var allPosts: MutableList<Posts> = mutableListOf()
 open class HomeFragment : Fragment() {
     val TAG = "ForumFragment"
     override fun onCreateView(
+        btFab = findViewById(R.id.btFab)
+
+                btFab.setOnClickListener {
+            val intent = Intent(this, ComposeActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_forum, container, false)
     }
@@ -48,7 +55,18 @@ open class HomeFragment : Fragment() {
 
         queryPosts()
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == RESULT_OK && requestCode == REQUEST_CODE){
+            val tweet = data?.getParcelableExtra("tweet") as Tweet
 
+            tweets.add(0, tweet)
+
+            adapter.notifyItemInserted(0)
+            rvTweets.smoothScrollToPosition(0)
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
     open fun queryPosts() {
         val query: ParseQuery<Posts> = ParseQuery.getQuery(Posts::class.java)
         query.include(Posts.KEY_USER)
