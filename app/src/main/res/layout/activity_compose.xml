@@ -4,39 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComposeActivity">
+    tools:context=".ComposeActivity"
+    android:background="@drawable/gradient">
 
     <EditText
-        android:id="@+id/tvTweetCompose"
+        android:id="@+id/tvPostCompose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="What's Happening?"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
         android:inputType="textMultiLine"
         android:minLines="5"
-        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.46" />
 
     <Button
-        android:id="@+id/btnTweet"
+        android:id="@+id/btnPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Tweet"
+        android:text="Post"
+        android:backgroundTint="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTweetCompose" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPostCompose" />
 
     <TextView
         android:id="@+id/tvCharCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_marginEnd="16dp"
         android:text="0/280"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/btnTweet"
-        app:layout_constraintEnd_toStartOf="@+id/btnTweet"
-        app:layout_constraintTop_toBottomOf="@+id/tvTweetCompose" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPost"
+        app:layout_constraintEnd_toStartOf="@+id/btnPost"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostCompose"
+        app:layout_constraintVertical_bias="0.722" />
 </androidx.constraintlayout.widget.ConstraintLayout>

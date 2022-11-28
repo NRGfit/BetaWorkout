@@ -73,13 +73,16 @@ open class HomeFragment : Fragment() {
 
         queryPosts()
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == RESULT_OK && requestCode == REQUEST_CODE){
-
+            adapter.notifyDataSetChanged()
+            rvPosts.smoothScrollToPosition(0)
         }
 
         super.onActivityResult(requestCode, resultCode, data)
     }
+
     open fun queryPosts() {
         val query: ParseQuery<Posts> = ParseQuery.getQuery(Posts::class.java)
         query.include(Posts.KEY_USER)
