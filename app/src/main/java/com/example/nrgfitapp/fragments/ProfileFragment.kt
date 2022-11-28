@@ -6,17 +6,29 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.nrgfitapp.ComposeActivity
 import com.example.nrgfitapp.DAOs.PostAdapter
 import com.example.nrgfitapp.DAOs.Posts
 import com.example.nrgfitapp.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.parse.FindCallback
 import com.parse.ParseException
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
-class ProfileFragment : ForumFragment() {
+class ProfileFragment : Fragment() {
+    lateinit var rvPosts: RecyclerView
+    lateinit var adapter: PostAdapter
+    lateinit var swipeContainer: SwipeRefreshLayout
+    lateinit var btFab: FloatingActionButton
+    var allPosts: MutableList<Posts> = mutableListOf()
+
+    val TAG = "ProfileFragment"
+    var REQUEST_CODE = 10;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,13 +56,6 @@ class ProfileFragment : ForumFragment() {
             android.R.color.holo_red_light
         );
 
-        btFab = view.findViewById(R.id.createPost)
-
-        btFab.setOnClickListener {
-            val intent = Intent(this.context, ComposeActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE)
-        }
-
         adapter = PostAdapter(requireContext(), allPosts)
         rvPosts.adapter = adapter
         rvPosts.layoutManager = LinearLayoutManager(requireContext())
@@ -58,7 +63,7 @@ class ProfileFragment : ForumFragment() {
         queryPosts()
     }
 
-    override fun queryPosts() {
+    open fun queryPosts() {
 
         // Specify which class to query
         val query: ParseQuery<Posts> = ParseQuery.getQuery(Posts::class.java)
