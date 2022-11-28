@@ -6,10 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
 import com.example.nrgfitapp.ComposeActivity
 import com.example.nrgfitapp.DAOs.PostAdapter
 import com.example.nrgfitapp.DAOs.Posts
@@ -41,6 +44,14 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val user = ParseUser.getCurrentUser()
+        val ivProfile = view.findViewById<ImageView>(R.id.ivProfile)
+        val tvProfileUsername = view.findViewById<TextView>(R.id.tvProfileUsername)
+Adde
+        tvProfileUsername.text = user.username
+        Glide.with(view.context).load(user.getParseFile("pfp")?.url).into(ivProfile)
+
 
         rvPosts = view.findViewById(R.id.feedRecyclerView)
         swipeContainer = view.findViewById(R.id.swipeContainer)
