@@ -1,6 +1,7 @@
 package com.example.nrgfitapp
 
 import android.app.Application
+import com.example.nrgfitapp.DAOs.Post
 import com.parse.Parse
 import com.parse.ParseObject
 
@@ -8,7 +9,7 @@ class NRGfitParseApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-//        ParseObject.registerSubclass(Post::class.java)
+        ParseObject.registerSubclass(Post::class.java)
 
         Parse.initialize(
             Parse.Configuration.Builder(this)
