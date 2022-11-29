@@ -1,6 +1,7 @@
 package com.example.nrgfitapp.DAOs
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,7 @@ class PostAdapter(val context: Context, val posts: List<Posts>) : RecyclerView.A
             tvDescription = itemView.findViewById(R.id.description)
             itemCreatedAt = itemView.findViewById(R.id.tvDate)
         }
-
+        var TAG = "test2"
         fun bind(post: Posts){
             tvUsername.text = post.getUser()?.username
             tvDescription.text = post.getDescription()

@@ -48,7 +48,8 @@ class ProfileFragment : Fragment() {
         val user = ParseUser.getCurrentUser()
         val ivProfile = view.findViewById<ImageView>(R.id.ivProfile)
         val tvProfileUsername = view.findViewById<TextView>(R.id.tvProfileUsername)
-Adde
+        user.keySet()?.let { Log.i(TAG, it.toString()) }
+        Log.i(TAG, "test")
         tvProfileUsername.text = user.username
         Glide.with(view.context).load(user.getParseFile("pfp")?.url).into(ivProfile)
 
