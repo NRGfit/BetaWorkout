@@ -36,8 +36,8 @@
 
     <TextView
         android:id="@+id/tvUsername"
-        android:layout_width="88dp"
-        android:layout_height="31dp"
+        android:layout_width="146dp"
+        android:layout_height="30dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:text="tvUsername "
@@ -45,7 +45,6 @@
         android:textSize="15dp"
         app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/tvDate"
@@ -107,12 +106,14 @@
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="363dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/white"
+        android:layout_width="369dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="4dp"
+        android:minLines="5"
         android:text="TextView"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
 
