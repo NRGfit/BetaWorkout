@@ -5,12 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivProfile"
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:padding="7dp"
+        android:scaleType="centerCrop"
+        app:flow_horizontalBias="0.5"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+        app:shapeAppearanceOverlay="@style/Circular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />

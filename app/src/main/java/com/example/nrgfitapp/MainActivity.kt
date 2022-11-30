@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.action_forum -> {
                     fragmentToShow = ForumFragment()
-                    Toast.makeText(this, "Forum", Toast.LENGTH_SHORT).show()
                 }
 //                R.id.action_compose -> {
 //                    fragmentToShow = ComposeFragment()
