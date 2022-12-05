@@ -4,9 +4,13 @@
 
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
 
-    <!-- Paste BOTH strings as required -->
+    <!-- Parse key and secret -->
     <string name="back4app_app_id">mm9wr7dY2o8j0QuZY9LAesobbRTASsvOInKXa4K7</string>
     <string name="back4app_client_key">iQ19BCkgHsKia4u3Jhce2QlsDg0MLsnfTsGK3FrC</string>
+
+    <!-- Parse key and secret -->
+    <string name="X_RapidAPI_Host">exercisedb.p.rapidapi.com</string>
+    <string name="X_RapidAPI_Key">91c5c9c63fmshe170eb5321ab8bep1e5adcjsn1c07025c7320</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

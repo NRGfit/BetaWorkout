@@ -5,18 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/ivProfile"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:padding="7dp"
-        android:scaleType="centerCrop"
-        app:flow_horizontalBias="0.5"
-        app:strokeColor="@color/black"
-        app:strokeWidth="2dp"
-        app:shapeAppearanceOverlay="@style/Circular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -27,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textColor="@color/white"
+        android:text="jp926"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivProfile"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +33,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Workouts"
-        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/ivProfile"
         app:layout_constraintTop_toBottomOf="@+id/tvProfileUsername" />
 
@@ -50,7 +43,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="Followers"
-        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/tvWorkoutsLabel"
         app:layout_constraintTop_toBottomOf="@+id/tvProfileUsername" />
 
@@ -61,7 +53,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="Following"
-        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/tvFollowersLabel"
         app:layout_constraintTop_toBottomOf="@+id/tvProfileUsername" />
 
@@ -72,7 +63,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="1dp"
         android:text="30"
-        android:textColor="@color/white"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/ivProfile"
         app:layout_constraintTop_toBottomOf="@+id/tvWorkoutsLabel" />
@@ -84,7 +74,6 @@
         android:layout_marginStart="23dp"
         android:layout_marginTop="1dp"
         android:text="12"
-        android:textColor="@color/white"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/tvWorkoutCount"
         app:layout_constraintTop_toBottomOf="@+id/tvFollowersLabel" />
@@ -96,7 +85,6 @@
         android:layout_marginStart="108dp"
         android:layout_marginTop="1dp"
         android:text="128"
-        android:textColor="@color/white"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/tvWorkoutCount"
         app:layout_constraintTop_toBottomOf="@+id/tvFollowersLabel" />
