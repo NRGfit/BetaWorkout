@@ -7,24 +7,28 @@
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_create_user.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_login.xml" value="0.1503623188405797" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_view_routine.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_feed.xml" value="0.20742753623188406" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_forum.xml" value="0.20652173913043478" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_profile.xml" value="0.20652173913043478" />
-        <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_routine.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_workout.xml" value="0.25" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/item_post.xml" value="0.18" />
-        <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/item_routine.xml" value="0.33" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.2453125" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/debug/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1095" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/circular.xml" value="0.1" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/gradient.xml" value="0.12" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2255" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1095" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/navbar_gradient.xml" value="0.12" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_compose.xml" value="0.3453703703703704" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_create_user.xml" value="0.33" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_main.xml" value="0.39895833333333336" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_forum.xml" value="0.33" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_routine.xml" value="0.33" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_workout.xml" value="0.33" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/item_post.xml" value="0.540398740818468" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.1" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
