@@ -5,7 +5,7 @@ import com.parse.ParseObject
 import com.parse.ParseUser
 
 
-@ParseClassName("RoutineExercise")
+@ParseClassName("Exercise")
 
 class Exercise : ParseObject() {
 
