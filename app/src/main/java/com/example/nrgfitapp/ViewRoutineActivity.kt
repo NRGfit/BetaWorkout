@@ -6,10 +6,7 @@ import android.os.StrictMode
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.nrgfitapp.DAOs.Posts
-import com.example.nrgfitapp.DAOs.Routine
-import com.example.nrgfitapp.DAOs.RoutineAdapter
-import com.example.nrgfitapp.DAOs.RoutineExercise
+import com.example.nrgfitapp.DAOs.*
 import com.parse.ParseQuery
 import com.parse.ParseUser
 import okhttp3.OkHttpClient
@@ -21,6 +18,7 @@ class ViewRoutineActivity : AppCompatActivity() {
     lateinit var rvRoutineExercises: RecyclerView
     lateinit var adapter: RoutineExerciseAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
+    var allRoutineExercises: MutableList<RoutineExercise> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +33,13 @@ class ViewRoutineActivity : AppCompatActivity() {
         query.include(Posts.KEY_USER)
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(RoutineExercise.KEY_ROUTINE, ParseUser.getCurrentUser())
-        query.findInBackground { routine, e ->
+        query.findInBackground { routineExercises, e ->
             if (e != null) {
                 Log.e(TAG, "ERROR")
             } else {
-                if (routine != null) {
+                if (routineExercises != null) {
                     allRoutineExercises.clear()
-                    allRoutineExercises.addAll(routine)
+                    allRoutineExercises.addAll(routineExercises)
                     adapter.notifyDataSetChanged()
                     swipeContainer.isRefreshing = false
                 }
