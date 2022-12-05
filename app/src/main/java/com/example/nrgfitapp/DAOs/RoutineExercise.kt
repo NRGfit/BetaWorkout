@@ -36,11 +36,18 @@ class RoutineExercise : ParseObject() {
     }
 
 
-    fun getReps(): ParseUser? {
-        return getParseUser(KEY_REPS)
+    fun getReps(): Number? {
+        return getNumber(KEY_REPS)
     }
-    fun setReps(reps: ParseUser){
+    fun setReps(reps: Number){
         put(KEY_REPS, reps)
+    }
+
+    fun getNotes(): String? {
+        return getString(KEY_NOTES)
+    }
+    fun setNotes(notes: String){
+        put(KEY_NOTES, notes)
     }
 
     companion object {
@@ -48,6 +55,7 @@ class RoutineExercise : ParseObject() {
         const val KEY_EXERCISE = "Exercise"
         const val KEY_SETS = "sets"
         const val KEY_REPS = "reps"
+        const val KEY_NOTES = "notes"
 
 
 
