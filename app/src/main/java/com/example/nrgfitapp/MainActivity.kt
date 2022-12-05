@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.nrgfitapp.fragments.ForumFragment
 import com.example.nrgfitapp.fragments.ProfileFragment
+import com.example.nrgfitapp.fragments.WorkoutFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.parse.*
 
@@ -31,10 +32,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_forum -> {
                     fragmentToShow = ForumFragment()
                 }
-//                R.id.action_compose -> {
-//                    fragmentToShow = ComposeFragment()
-//                    //Toast.makeText(this, "Compose", Toast.LENGTH_SHORT).show()
-//                }
+                R.id.action_routine -> {
+                    fragmentToShow = WorkoutFragment()
+                    //Toast.makeText(this, "Compose", Toast.LENGTH_SHORT).show()
+                }
                 R.id.action_profile -> {
                     fragmentToShow = ProfileFragment()
                     //Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()

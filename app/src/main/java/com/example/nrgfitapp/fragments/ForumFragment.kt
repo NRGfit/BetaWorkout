@@ -3,24 +3,26 @@ package com.example.nrgfitapp.fragments
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.nrgfitapp.ComposeActivity
-import com.example.nrgfitapp.DAOs.Posts
 import com.example.nrgfitapp.DAOs.PostAdapter
+import com.example.nrgfitapp.DAOs.Posts
 import com.example.nrgfitapp.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.parse.FindCallback
 import com.parse.ParseException
 import com.parse.ParseQuery
-
-
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 
 open class ForumFragment : Fragment() {
@@ -94,9 +96,9 @@ open class ForumFragment : Fragment() {
                     Log.e(TAG, "Error fetching posts")
                 }else{
                     if(posts != null){
-                        for(post in posts) {
-                            Log.i(TAG, "Post: ${post.getDescription()} Username: ${post.getUser()?.username}")
-                        }
+//                        for(post in posts) {
+//                            Log.i(TAG, "Post: ${post.getDescription()} Username: ${post.getUser()?.username}")
+//                        }
                         allPosts.clear()
                         allPosts.addAll(posts)
                         adapter.notifyDataSetChanged()
