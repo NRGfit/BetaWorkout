@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.nrgfitapp.DAOs.PostAdapter
@@ -21,11 +22,11 @@ import com.parse.ParseUser
 
 
 class WorkoutFragment : Fragment() {
-    lateinit var rvPosts: RecyclerView
+    lateinit var rvRoutines: RecyclerView
     lateinit var adapter: RoutineAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
     lateinit var btFab: FloatingActionButton
-    var allPosts: MutableList<Routine> = mutableListOf()
+    var allRoutines: MutableList<Routine> = mutableListOf()
 
     val TAG = "WorkoutFragment"
     var REQUEST_CODE = 10;
@@ -36,11 +37,31 @@ class WorkoutFragment : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_routine, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        rvRoutines = view.findViewById(R.id.routineRecyclerView)
+        swipeContainer = view.findViewById(R.id.swipeContainer)
+
+        swipeContainer.setOnRefreshListener {
+            queryRoutines()
+        }
+
+        swipeContainer.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light
+        );
+
+        adapter = RoutineAdapter(requireContext(), allRoutines)
+        rvRoutines.adapter = adapter
+        rvRoutines.layoutManager = LinearLayoutManager(requireContext())
+
+        queryRoutines()
     }
 
     open fun queryRoutines() {
@@ -56,8 +77,8 @@ class WorkoutFragment : Fragment() {
                 Log.e(TAG, "ERROR")
             } else {
                 if (routine != null) {
-                    allPosts.clear()
-                    allPosts.addAll(routine)
+                    allRoutines.clear()
+                    allRoutines.addAll(routine)
                     adapter.notifyDataSetChanged()
                     swipeContainer.isRefreshing = false
                 }

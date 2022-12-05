@@ -28,23 +28,21 @@ class RoutineAdapter(val context: Context, val routines: List<Routine>) : Recycl
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //needs to be edited to match item_routine.xml
-        val tvUsername: TextView
-        val ivProfilePic: ImageView
+        val tvRoutineName: TextView
         val tvDescription: TextView
-        val itemCreatedAt: TextView
+        val tvCreator: TextView
 
         init{
-            tvUsername = itemView.findViewById(R.id.tvUsername)
-            ivProfilePic = itemView.findViewById(R.id.ivProfilePic)
-            tvDescription = itemView.findViewById(R.id.description)
-            itemCreatedAt = itemView.findViewById(R.id.tvDate)
+            tvDescription = itemView.findViewById(R.id.tv_Description)
+            tvRoutineName = itemView.findViewById(R.id.tv_RoutineName)
+            tvCreator = itemView.findViewById(R.id.tv_Creator)
         }
         var TAG = "test2"
         fun bind(routine: Routine){
-            tvUsername.text = routine.getUser()?.username
+            tvRoutineName.text = routine.getRoutineName()
             tvDescription.text = routine.getDescription()
-            itemCreatedAt.text = routine.getFormattedTimestamp(routine.createdAt)
+            tvCreator.text = "you"
+
         }
     }
 }

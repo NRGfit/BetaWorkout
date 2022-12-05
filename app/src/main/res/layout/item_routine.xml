@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/tvWorkoutName"
+        android:id="@+id/tv_RoutineName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -27,7 +27,7 @@
         android:textAllCaps="false"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWorkoutName" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_RoutineName" />
 
     <TextView
         android:id="@+id/tvWorkoutDuration"
@@ -40,42 +40,42 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/tvVolumeLabel"
+        android:id="@+id/tv_CreatorLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="51dp"
         android:layout_marginTop="4dp"
-        android:text="Volume"
+        android:text="Creator"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/tvWorkoutName" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_RoutineName" />
 
     <TextView
-        android:id="@+id/tvWorkoutVolume"
+        android:id="@+id/tv_Creator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="4dp"
-        android:text="30,000 lbs"
+        android:text="you"
         app:layout_constraintStart_toEndOf="@+id/tvWorkoutDuration"
-        app:layout_constraintTop_toBottomOf="@+id/tvVolumeLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_CreatorLabel" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tv_Description"
         android:layout_width="380dp"
         android:layout_height="51dp"
-        android:text="EVENTUALLY IMPORT THE WORKOUT YOU DID INTO THIS SECTION - maybe use fragment container view once we build the workout fragment"
+        android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWorkoutlabel" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_Descriptionlabel" />
 
     <TextView
-        android:id="@+id/tvWorkoutlabel"
+        android:id="@+id/tv_Descriptionlabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:text="Workout"
+        android:text="Description"
         android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

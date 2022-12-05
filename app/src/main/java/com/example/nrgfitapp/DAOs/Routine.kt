@@ -17,6 +17,12 @@ class Routine : ParseObject() {
         put(KEY_ROUTINE_NAME, description)
     }
 
+    fun getDescription(): String? {
+        return getString(KEY_DESCRIPTION)
+    }
+    fun setDescription(description: String){
+        put(KEY_DESCRIPTION, description)
+    }
 
     fun getUser(): ParseUser? {
         return getParseUser(KEY_USER)
@@ -31,5 +37,6 @@ class Routine : ParseObject() {
     companion object {
         const val KEY_ROUTINE_NAME = "routineName"
         const val KEY_USER = "username"
+        const val KEY_DESCRIPTION = "description"
     }
 }
