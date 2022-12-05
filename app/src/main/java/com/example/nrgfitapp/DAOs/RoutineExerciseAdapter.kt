@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nrgfitapp.R
@@ -25,20 +26,29 @@ class RoutineExerciseAdapter(val context: Context, val exercises: List<RoutineEx
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvRoutineName: TextView
-        val tvDescription: TextView
-        val tvCreator: TextView
+        val tvExerciseName: TextView
+        val ivExercise: ImageView
+        val tvExerciseSets: TextView
+        val tvExerciseReps: TextView
+        val tvExerciseWeights: TextView
+        val tvExerciseNotes: TextView
 
         init{
-            tvDescription = itemView.findViewById(R.id.tv_Description)
-            tvRoutineName = itemView.findViewById(R.id.tv_RoutineName)
-            tvCreator = itemView.findViewById(R.id.tv_Creator)
+            tvExerciseName = itemView.findViewById(R.id.exerciseName)
+            ivExercise = itemView.findViewById(R.id.ivExercise)
+            tvExerciseSets = itemView.findViewById(R.id.exerciseSets)
+            tvExerciseReps = itemView.findViewById(R.id.exerciseReps)
+            tvExerciseWeights = itemView.findViewById(R.id.exerciseWeights)
+            tvExerciseNotes = itemView.findViewById(R.id.exerciseNotes)
         }
         var TAG = "test2"
         fun bind(routineExercise: RoutineExercise){
-            tvRoutineName.text = routineExercise.getRoutineName()
-            tvDescription.text = routineExercise.getDescription()
-            tvCreator.text = "you"
+            //tvExerciseName = itemView.findViewById(R.id.exerciseName)
+            //ivExercise = itemView.findViewById(R.id.ivExercise)
+            tvExerciseSets.text = routineExercise.getSets().toString()
+            tvExerciseReps.text = routineExercise.getReps().toString()
+            //tvExerciseWeights = itemView.findViewById(R.id.exerciseWeights)
+            tvExerciseNotes.text = routineExercise.getNotes()
 
         }
     }
