@@ -35,7 +35,7 @@ class WorkoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workout, container, false)
+        return inflater.inflate(R.layout.item_routine, container, false)
     }
 
     companion object {

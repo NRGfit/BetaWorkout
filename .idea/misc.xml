@@ -20,11 +20,13 @@
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2255" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1095" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/navbar_gradient.xml" value="0.12" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_compose.xml" value="0.3453703703703704" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_create_user.xml" value="0.33" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_main.xml" value="0.39895833333333336" />
-        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_forum.xml" value="0.1831306990881459" />
-        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_forum.xml" value="0.33" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_routine.xml" value="0.33" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_workout.xml" value="0.33" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/item_post.xml" value="0.540398740818468" />
         <entry key="..\:/Users/anash/AndroidStudioProjects/BetaWorkout/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.1" />
