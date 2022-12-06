@@ -58,10 +58,6 @@ class ViewRoutineActivity : AppCompatActivity() {
                 Log.e(TAG, "ERROR")
             } else {
                 if (routineExercises != null) {
-                    for (post in routineExercises) {
-                        Log.i(
-                            TAG, "Post: " + post.getNotes())
-                    }
                     allRoutineExercises.clear()
                     allRoutineExercises.addAll(routineExercises)
                     adapter.notifyDataSetChanged()

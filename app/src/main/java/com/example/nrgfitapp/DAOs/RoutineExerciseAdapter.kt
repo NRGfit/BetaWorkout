@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.nrgfitapp.R
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -48,13 +49,14 @@ class RoutineExerciseAdapter(val context: Context, val exercises: List<RoutineEx
         }
         var TAG = "test2"
         fun bind(routineExercise: RoutineExercise){
-//            val exercise: Exercise = routineExercise.getExercise() as Exercise
-//            val exerciseID: String? = exercise.getExerciseDBID()
-//            if (exerciseID != null) {
-//                Log.i(TAG, exerciseID)
-//            }
-            //tvExerciseName = itemView.findViewById(R.id.exerciseName)
-            //ivExercise = itemView.findViewById(R.id.ivExercise)
+            val exercise: Exercise = routineExercise.getParseObject(RoutineExercise.KEY_EXERCISE)?.fetch() as Exercise
+            val exerciseID: String? = exercise.getExerciseDBID()
+            val exerciseInfo : JSONObject
+            if (exerciseID != null) {
+                exerciseInfo = getExercise(exerciseID, itemView)!!
+                tvExerciseName.text = exerciseInfo.getString("name")
+                Glide.with(itemView.context).asGif().load(exerciseInfo.getString("gifUrl")).into(ivExercise)
+            }
             tvExerciseSets.text = routineExercise.getSets().toString()
             tvExerciseReps.text = routineExercise.getReps().toString()
             tvExerciseWeights.text = routineExercise.getWeights()
@@ -62,20 +64,20 @@ class RoutineExerciseAdapter(val context: Context, val exercises: List<RoutineEx
 
         }
 
-        fun getExercise(dbid: String){
+        fun getExercise(dbid: String, view: View): JSONObject? {
             val policy = StrictMode.ThreadPolicy.Builder()
                 .permitAll().build()
             StrictMode.setThreadPolicy(policy)
 
-            var res: String? = null
+            var res: JSONObject? = null
             try {
                 val client = OkHttpClient()
 
                 val request = Request.Builder()
                     .url("https://exercisedb.p.rapidapi.com/exercises/exercise/$dbid")
                     .get()
-                    .addHeader("X-RapidAPI-Key", R.string.X_RapidAPI_Key.toString())
-                    .addHeader("X-RapidAPI-Host", R.string.X_RapidAPI_Host.toString())
+                    .addHeader("X-RapidAPI-Key", view.context.resources.getString(R.string.X_RapidAPI_Key))
+                    .addHeader("X-RapidAPI-Host", view.context.resources.getString(R.string.X_RapidAPI_Host))
                     .build()
 
                 val response = client.newCall(request).execute()
@@ -83,7 +85,7 @@ class RoutineExerciseAdapter(val context: Context, val exercises: List<RoutineEx
                 val code = response.code;
                 if (code == 200) {
                     val body = response.body;
-                    res = body?.string();
+                    res = JSONObject(body?.string());
                     body?.close();
                 }
             }catch (th: Throwable) {
@@ -91,9 +93,10 @@ class RoutineExerciseAdapter(val context: Context, val exercises: List<RoutineEx
             }
 
             if (res != null) {
-                Log.i(TAG, res)
+                return res
+            }else{
+                return null
             }
         }
-
     }
 }
