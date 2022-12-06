@@ -243,3 +243,6 @@ Sprint Week 3
 - [x] Gif Demonstration
 - [x] Display Routines
 - [x] Display individual exercises
+
+<img src='Week 3 Gif.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
