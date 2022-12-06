@@ -69,7 +69,7 @@ class RoutineFragment : Fragment() {
         val query: ParseQuery<Routine> = ParseQuery.getQuery(Routine::class.java)
 
         // Find all Routine objects
-        query.include(Posts.KEY_USER)
+        query.include(Routine.KEY_USER)
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(Routine.KEY_USER, ParseUser.getCurrentUser())
         query.findInBackground { routine, e ->

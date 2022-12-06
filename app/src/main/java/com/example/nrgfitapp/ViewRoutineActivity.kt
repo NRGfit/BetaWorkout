@@ -51,9 +51,9 @@ class ViewRoutineActivity : AppCompatActivity() {
         val query: ParseQuery<RoutineExercise> = ParseQuery.getQuery(RoutineExercise::class.java)
 
         // Find all Routine objects
-        query.include(Posts.KEY_USER)
+        query.include(RoutineExercise.KEY_ROUTINE)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(RoutineExercise.KEY_ROUTINE, ParseUser.getCurrentUser())
+        query.whereEqualTo(RoutineExercise.KEY_ROUTINE, intent.getStringExtra("routineID"))
         query.findInBackground { routineExercises, e ->
             if (e != null) {
                 Log.e(TAG, "ERROR")
