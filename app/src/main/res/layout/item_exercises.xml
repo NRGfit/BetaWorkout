@@ -12,6 +12,8 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:text="Deadlift"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/ivExercise"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Sets"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseNotes" />
 
@@ -41,6 +44,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:text="3"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseSetsDisplay" />
 
@@ -50,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
         android:text="Reps"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/exerciseSetsDisplay"
         app:layout_constraintTop_toBottomOf="@+id/exerciseNotes" />
 
@@ -60,6 +65,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginTop="4dp"
         android:text="5"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/exerciseSets"
         app:layout_constraintTop_toBottomOf="@+id/exerciseRepsDisplay" />
 
@@ -69,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:text="Weights"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/exerciseRepsDisplay"
         app:layout_constraintTop_toBottomOf="@+id/exerciseNotes" />
 
@@ -79,6 +86,7 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="4dp"
         android:text="135, 185, 225"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/exerciseReps"
         app:layout_constraintTop_toBottomOf="@+id/exerciseWeightsDisplay" />
 
@@ -89,7 +97,18 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:text="80-85% 1RM, chest up"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivExercise" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exerciseReps" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
