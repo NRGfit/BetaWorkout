@@ -226,6 +226,15 @@ Sprint Week 1
 - [x] Allow Users to Create Accounts
 - [x] UI Adjustments
 
+Sprint Week 2
+
+<img src='nrgfitweek2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+- [x] Adjust Parse Database for Posting functions
+- [x] Users create posts
+- [x] Forum Feed Created
+- [x] Profile Page Created
+
 Sprint Week 3
 
 <img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
