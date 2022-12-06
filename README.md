@@ -7,6 +7,7 @@ Workout app that allow for you to plan sessions and view other people's sessions
 App Evaluation
 
 Category: Workout/ Social Forum
+
 Mobile: When at the gym using a computer is out of the question and using the web may not be efficient. This makes our app fully intended for mobile use. Granted if you want to use it on the web, then it's possible, but for efficient use in the gym the app is best.
 
 Story: Create workout plans that people can make private or public. Connect with other users for advice or their own workouts or publiclly made workouts. 
