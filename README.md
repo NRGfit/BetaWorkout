@@ -237,12 +237,9 @@ Sprint Week 2
 
 Sprint Week 3
 
-<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='Week 3 Gif.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 - [x] Adjust Parse Database for Routine functions
 - [x] Gif Demonstration
 - [x] Display Routines
 - [x] Display individual exercises
-
-<img src='Week 3 Gif.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
