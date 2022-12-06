@@ -1,6 +1,8 @@
 package com.example.nrgfitapp.DAOs
 
 import android.content.Context
+import android.os.StrictMode
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nrgfitapp.R
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 class RoutineExerciseAdapter(val context: Context, val exercises: List<RoutineExercise>) : RecyclerView.Adapter<RoutineExerciseAdapter.ViewHolder>() {
 
@@ -51,5 +55,7 @@ class RoutineExerciseAdapter(val context: Context, val exercises: List<RoutineEx
             tvExerciseNotes.text = routineExercise.getNotes()
 
         }
+
+
     }
 }

@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.nrgfitapp.fragments.ForumFragment
 import com.example.nrgfitapp.fragments.ProfileFragment
-import com.example.nrgfitapp.fragments.WorkoutFragment
+import com.example.nrgfitapp.fragments.RoutineFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.parse.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     fragmentToShow = ForumFragment()
                 }
                 R.id.action_routine -> {
-                    fragmentToShow = WorkoutFragment()
+                    fragmentToShow = RoutineFragment()
                     //Toast.makeText(this, "Compose", Toast.LENGTH_SHORT).show()
                 }
                 R.id.action_profile -> {

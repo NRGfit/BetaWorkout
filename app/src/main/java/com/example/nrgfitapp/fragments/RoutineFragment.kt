@@ -21,7 +21,7 @@ import com.parse.ParseQuery
 import com.parse.ParseUser
 
 
-class WorkoutFragment : Fragment() {
+class RoutineFragment : Fragment() {
     lateinit var rvRoutines: RecyclerView
     lateinit var adapter: RoutineAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
