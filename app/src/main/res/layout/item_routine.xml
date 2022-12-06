@@ -4,20 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/cl_Routine">
+    android:id="@+id/cl_Routine"
+    android:layout_margin="12dp"
+    android:background="@drawable/border_background">
 
 
     <TextView
         android:id="@+id/tv_RoutineName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
         android:text="Killer Leg Workout"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +28,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         android:text="Time"
         android:textAllCaps="false"
@@ -38,7 +41,7 @@
         android:id="@+id/tvWorkoutDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
         android:text="1h 3min"
         android:textColor="@color/white"
@@ -49,31 +52,33 @@
         android:id="@+id/tv_CreatorLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="280dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:text="Creator"
         android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_RoutineName" />
 
     <TextView
         android:id="@+id/tv_Creator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="280dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
         android:text="you"
         android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/tvWorkoutDuration"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_CreatorLabel" />
 
     <TextView
         android:id="@+id/tv_Description"
-        android:layout_width="380dp"
-        android:layout_height="51dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:text="Description"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_Descriptionlabel" />
@@ -82,7 +87,7 @@
         android:id="@+id/tv_Descriptionlabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:text="Description"
         android:textColor="@color/white"
@@ -90,18 +95,5 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWorkoutDuration" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_Description" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
