@@ -8,9 +8,13 @@ App Evaluation
 
 Category: Workout/ Social Forum
 Mobile: When at the gym using a computer is out of the question and using the web may not be efficient. This makes our app fully intended for mobile use. Granted if you want to use it on the web, then it's possible, but for efficient use in the gym the app is best.
+
 Story: Create workout plans that people can make private or public. Connect with other users for advice or their own workouts or publiclly made workouts. 
+
 Market: Any individual that is an avid Gym member.
+
 Habit: Should aim to be used whenever someone goes to the gym unless it's for a minimal workout or not desired.
+
 Scope: First, get users to create their work out plan and determine wether they want to post it or not. Hopefully include the possiblity of a calendar that tracks what the user did on each day. Could work in tandem with apps that watch calorie intake.
 
 Product Spec
