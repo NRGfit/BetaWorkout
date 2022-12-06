@@ -72,13 +72,13 @@ class RoutineFragment : Fragment() {
         query.include(Routine.KEY_USER)
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(Routine.KEY_USER, ParseUser.getCurrentUser())
-        query.findInBackground { routine, e ->
+        query.findInBackground { routines, e ->
             if (e != null) {
                 Log.e(TAG, "ERROR")
             } else {
-                if (routine != null) {
+                if (routines != null) {
                     allRoutines.clear()
-                    allRoutines.addAll(routine)
+                    allRoutines.addAll(routines)
                     adapter.notifyDataSetChanged()
                     swipeContainer.isRefreshing = false
                 }

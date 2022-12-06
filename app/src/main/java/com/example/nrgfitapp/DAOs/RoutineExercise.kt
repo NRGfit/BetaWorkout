@@ -50,12 +50,20 @@ class RoutineExercise : ParseObject() {
         put(KEY_NOTES, notes)
     }
 
+    fun getWeights(): String? {
+        return getString(KEY_WEIGHTS)
+    }
+    fun setWeights(weights: String){
+        put(KEY_WEIGHTS, weights)
+    }
+
     companion object {
         const val KEY_ROUTINE = "Routine"
         const val KEY_EXERCISE = "Exercise"
         const val KEY_SETS = "sets"
         const val KEY_REPS = "reps"
         const val KEY_NOTES = "notes"
+        const val KEY_WEIGHTS = "weights"
 
 
 

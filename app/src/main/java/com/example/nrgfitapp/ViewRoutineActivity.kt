@@ -52,52 +52,22 @@ class ViewRoutineActivity : AppCompatActivity() {
 
         // Find all Routine objects
         query.include(RoutineExercise.KEY_ROUTINE)
-        query.addDescendingOrder("createdAt")
-        query.whereEqualTo(RoutineExercise.KEY_ROUTINE, intent.getStringExtra("routineID"))
+        //query.whereEqualTo(RoutineExercise.KEY_ROUTINE, intent.getStringExtra("routineID"))
         query.findInBackground { routineExercises, e ->
             if (e != null) {
                 Log.e(TAG, "ERROR")
             } else {
                 if (routineExercises != null) {
+                    for (post in routineExercises) {
+                        Log.i(
+                            TAG, "Post: " + post.getNotes())
+                    }
                     allRoutineExercises.clear()
                     allRoutineExercises.addAll(routineExercises)
                     adapter.notifyDataSetChanged()
                     swipeContainer.isRefreshing = false
                 }
             }
-        }
-    }
-
-    fun getExercises(){
-        val policy = StrictMode.ThreadPolicy.Builder()
-            .permitAll().build()
-        StrictMode.setThreadPolicy(policy)
-
-        var res: String? = null
-        try {
-            val client = OkHttpClient()
-
-            val request = Request.Builder()
-                .url("https://exercisedb.p.rapidapi.com/exercises/exercise/0001")
-                .get()
-                .addHeader("X-RapidAPI-Key", getString(R.string.X_RapidAPI_Key))
-                .addHeader("X-RapidAPI-Host", getString(R.string.X_RapidAPI_Host))
-                .build()
-
-            val response = client.newCall(request).execute()
-
-            val code = response.code;
-            if (code == 200) {
-                val body = response.body;
-                res = body?.string();
-                body?.close();
-            }
-        }catch (th: Throwable) {
-            Log.i(TAG, th.localizedMessage)
-        }
-
-        if (res != null) {
-            Log.i(TAG, res)
         }
     }
 }
