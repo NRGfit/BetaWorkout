@@ -33,7 +33,7 @@ Product Spec
    Optional Nice-to-have Stories
 
 * Daily Streak keeping track of how often the user worksout
-* Track the weights of exersises performed
+* Track the weights of exercises performed
 * Visual Representation of a workout
 * Time tracked of workouts per day
 
