@@ -27,7 +27,7 @@ class RoutineFragment : Fragment() {
     lateinit var btFab: FloatingActionButton
     var allRoutines: MutableList<Routine> = mutableListOf()
 
-    val TAG = "WorkoutFragment"
+    val TAG = "WorkoutCreateFragment"
     var REQUEST_CODE = 10;
 
     override fun onCreateView(
@@ -60,6 +60,7 @@ class RoutineFragment : Fragment() {
 
         btFab.setOnClickListener {
             val intent = Intent(this.context, ComposeRoutineActivity::class.java)
+            Log.i(TAG, "clicked")
             startActivityForResult(intent, REQUEST_CODE)
         }
 

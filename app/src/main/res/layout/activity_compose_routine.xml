@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComposeRoutineActivity">
+    tools:context=".ComposeRoutineActivity"
+    android:background="@drawable/gradient">
 
     <EditText
         android:id="@+id/routineName"

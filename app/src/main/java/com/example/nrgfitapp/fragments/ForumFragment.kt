@@ -60,7 +60,7 @@ open class ForumFragment : Fragment() {
             android.R.color.holo_red_light
         );
 
-        btFab = view.findViewById(R.id.createRoutine)
+        btFab = view.findViewById(R.id.createPost)
 
         btFab.setOnClickListener {
             val intent = Intent(this.context, ComposeActivity::class.java)
