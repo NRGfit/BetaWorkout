@@ -24,11 +24,8 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.NRGfitApp"
-        android:usesCleartextTraffic="true"
-        tools:targetApi="31">
-        <activity
-            android:name=".ComposeRoutineActivity"
-            android:exported="false" />
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".ViewRoutineActivity"
             android:exported="false" />
@@ -70,6 +67,8 @@
         <meta-data
             android:name="com.parse.EDB_KEY"
             android:value="@string/X_RapidAPI_Key" />
+
+
     </application>
 
 </manifest>
