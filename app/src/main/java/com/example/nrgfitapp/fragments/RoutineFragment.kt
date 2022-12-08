@@ -1,5 +1,6 @@
 package com.example.nrgfitapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,14 +10,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.nrgfitapp.DAOs.PostAdapter
-import com.example.nrgfitapp.DAOs.Posts
+import com.example.nrgfitapp.ComposeActivity
+import com.example.nrgfitapp.ComposeRoutineActivity
 import com.example.nrgfitapp.DAOs.Routine
 import com.example.nrgfitapp.DAOs.RoutineAdapter
 import com.example.nrgfitapp.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.parse.FindCallback
-import com.parse.ParseException
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
@@ -56,6 +55,13 @@ class RoutineFragment : Fragment() {
             android.R.color.holo_orange_light,
             android.R.color.holo_red_light
         );
+
+        btFab = view.findViewById(R.id.createRoutine)
+
+        btFab.setOnClickListener {
+            val intent = Intent(this.context, ComposeRoutineActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
 
         adapter = RoutineAdapter(requireContext(), allRoutines)
         rvRoutines.adapter = adapter

@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createPost"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,13 +21,13 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/createPost"
+        android:id="@+id/createRoutine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:src="@android:drawable/ic_input_add"
-        app:layout_anchor="@id/feedRecyclerView"
+        app:layout_anchor="@id/routineRecyclerView"
         app:layout_anchorGravity="bottom|right|end" />
 
 </FrameLayout>
