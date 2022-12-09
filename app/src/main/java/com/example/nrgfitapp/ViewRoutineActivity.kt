@@ -1,17 +1,16 @@
 package com.example.nrgfitapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.StrictMode
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.nrgfitapp.DAOs.*
+import com.example.nrgfitapp.DAOs.RoutineExercise
+import com.example.nrgfitapp.DAOs.RoutineExerciseAdapter
+import com.parse.ParseObject
 import com.parse.ParseQuery
-import com.parse.ParseUser
-import okhttp3.OkHttpClient
-import okhttp3.Request
+
 
 class ViewRoutineActivity : AppCompatActivity() {
     val TAG = "ViewRoutineActivity"
@@ -47,12 +46,15 @@ class ViewRoutineActivity : AppCompatActivity() {
     }
 
     fun queryRoutineExercises(){
+
+        val obj = ParseObject.createWithoutData("Routine", intent.getStringExtra("routineID"))
+
         // Specify which class to query
         val query: ParseQuery<RoutineExercise> = ParseQuery.getQuery(RoutineExercise::class.java)
 
         // Find all Routine objects
         query.include(RoutineExercise.KEY_ROUTINE)
-        query.whereEqualTo(RoutineExercise.KEY_EXERCISE, intent.getStringExtra("routineID"))
+        query.whereEqualTo(RoutineExercise.KEY_ROUTINE, obj)
         query.findInBackground { routineExercises, e ->
             if (e != null) {
                 Log.e(TAG, "ERROR")
