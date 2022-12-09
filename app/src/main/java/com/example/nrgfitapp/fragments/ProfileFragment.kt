@@ -23,7 +23,7 @@ import com.parse.ParseException
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
-class ProfileFragment : Fragment() {
+open class ProfileFragment : Fragment() {
     lateinit var rvPosts: RecyclerView
     lateinit var adapter: PostAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
@@ -83,24 +83,23 @@ class ProfileFragment : Fragment() {
         query.include(Posts.KEY_USER)
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(Posts.KEY_USER, ParseUser.getCurrentUser())
-        query.findInBackground(object: FindCallback<Posts> {
-            override fun done(posts: MutableList<Posts>?, e: ParseException?) {
-                if (e != null) {
-                    Log.e(TAG, "ERROR")
-                } else {
-                    if (posts != null) {
-                        for (post in posts) {
-                            Log.i(
-                                TAG, "Post: " + post.getDescription() + ", Username: " +
-                                        post.getUser()?.username)
-                        }
-                        allPosts.clear()
-                        allPosts.addAll(posts)
-                        adapter.notifyDataSetChanged()
-                        swipeContainer.isRefreshing = false
+        query.findInBackground { posts, e ->
+            if (e != null) {
+                Log.e(TAG, "ERROR")
+            } else {
+                if (posts != null) {
+                    for (post in posts) {
+//                        Log.i(
+//                            TAG, "Post: " + post.getDescription() + ", Username: " +
+//                                    post.getUser()?.username
+//                        )
                     }
+                    allPosts.clear()
+                    allPosts.addAll(posts)
+                    adapter.notifyDataSetChanged()
+                    swipeContainer.isRefreshing = false
                 }
             }
-        })
+        }
     }
 }

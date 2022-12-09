@@ -52,7 +52,7 @@ class ViewRoutineActivity : AppCompatActivity() {
 
         // Find all Routine objects
         query.include(RoutineExercise.KEY_ROUTINE)
-        //query.whereEqualTo(RoutineExercise.KEY_ROUTINE, intent.getStringExtra("routineID"))
+        query.whereEqualTo(RoutineExercise.KEY_EXERCISE, intent.getStringExtra("routineID"))
         query.findInBackground { routineExercises, e ->
             if (e != null) {
                 Log.e(TAG, "ERROR")

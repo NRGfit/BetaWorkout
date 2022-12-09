@@ -1,10 +1,7 @@
 package com.example.nrgfitapp.DAOs
 
-import com.example.nrgfitapp.TimeFormatter
 import com.parse.ParseClassName
 import com.parse.ParseObject
-import com.parse.ParseUser
-import java.util.*
 
 
 @ParseClassName("RoutineExercise")
