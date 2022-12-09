@@ -14,6 +14,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.nrgfitapp.ComposeActivity
 import com.example.nrgfitapp.DAOs.PostAdapter
 import com.example.nrgfitapp.DAOs.Posts
+import com.example.nrgfitapp.DAOs.Routine
+import com.example.nrgfitapp.DAOs.RoutineAdapter
 import com.example.nrgfitapp.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.parse.FindCallback
@@ -24,7 +26,6 @@ import okhttp3.Request
 
 
 open class ForumFragment : Fragment() {
-
     lateinit var rvPosts: RecyclerView
     lateinit var adapter: PostAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
@@ -86,25 +87,20 @@ open class ForumFragment : Fragment() {
     open fun queryPosts() {
         val query: ParseQuery<Posts> = ParseQuery.getQuery(Posts::class.java)
         query.include(Posts.KEY_USER)
+        query.include(Posts.KEY_ROUTINE)
         query.addDescendingOrder("createdAt")
-        query.findInBackground(object : FindCallback<Posts> {
-            override fun done(posts: MutableList<Posts>?, e: ParseException?) {
-                if(e != null){
-                    e.printStackTrace()
-                    Log.e(TAG, "Error fetching posts")
-                }else{
-                    if(posts != null){
-//                        for(post in posts) {
-//                            Log.i(TAG, "Post: ${post.getDescription()} Username: ${post.getUser()?.username}")
-//                        }
-                        allPosts.clear()
-                        allPosts.addAll(posts)
-                        adapter.notifyDataSetChanged()
-
-                        swipeContainer.isRefreshing = false
-                    }
+        query.findInBackground { posts, e ->
+            if (e != null) {
+                e.printStackTrace()
+                Log.e(TAG, "Error fetching posts")
+            } else {
+                if (posts != null) {
+                    allPosts.clear()
+                    allPosts.addAll(posts)
+                    adapter.notifyDataSetChanged()
+                    swipeContainer.isRefreshing = false
                 }
             }
-        })
+        }
     }
 }

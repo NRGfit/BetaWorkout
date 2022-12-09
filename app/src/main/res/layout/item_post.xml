@@ -15,7 +15,7 @@
         android:textColor="@color/white"
         android:textSize="13dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_RoutinePost" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivProfilePic"
@@ -69,7 +69,7 @@
         android:textColor="@color/white"
         android:textSize="13dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_RoutinePost" />
 
     <Button
         android:id="@+id/button_like"
@@ -80,7 +80,7 @@
         android:backgroundTint="#2196F3"
         app:icon="@drawable/ic_baseline_thumb_up_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description" />
+        app:layout_constraintTop_toBottomOf="@id/rv_RoutinePost" />
 
     <Button
         android:id="@+id/button_comment"
@@ -91,7 +91,7 @@
         android:backgroundTint="#2196F3"
         app:icon="@drawable/ic_baseline_chat_bubble_24"
         app:layout_constraintStart_toEndOf="@+id/button_like"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_RoutinePost" />
 
     <Button
         android:id="@+id/button_share"
@@ -102,7 +102,7 @@
         android:backgroundTint="#2196F3"
         app:icon="@drawable/ic_baseline_share_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_RoutinePost" />
 
     <TextView
         android:id="@+id/description"
@@ -126,5 +126,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_comment" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_RoutinePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

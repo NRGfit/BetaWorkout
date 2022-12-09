@@ -1,5 +1,6 @@
 package com.example.nrgfitapp.fragments
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,8 @@ import com.bumptech.glide.Glide
 import com.example.nrgfitapp.ComposeActivity
 import com.example.nrgfitapp.DAOs.PostAdapter
 import com.example.nrgfitapp.DAOs.Posts
+import com.example.nrgfitapp.DAOs.Routine
+import com.example.nrgfitapp.DAOs.RoutineAdapter
 import com.example.nrgfitapp.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.parse.FindCallback
@@ -24,11 +27,11 @@ import com.parse.ParseQuery
 import com.parse.ParseUser
 
 open class ProfileFragment : Fragment() {
-    lateinit var rvPosts: RecyclerView
-    lateinit var adapter: PostAdapter
+    private lateinit var rvPosts: RecyclerView
+    private lateinit var adapter: PostAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
-    lateinit var btFab: FloatingActionButton
-    var allPosts: MutableList<Posts> = mutableListOf()
+    private var allPosts: MutableList<Posts> = mutableListOf()
+
 
     val TAG = "ProfileFragment"
     var REQUEST_CODE = 10;
@@ -54,6 +57,7 @@ open class ProfileFragment : Fragment() {
 
 
         rvPosts = view.findViewById(R.id.feedRecyclerView)
+
         swipeContainer = view.findViewById(R.id.swipeContainer)
 
         swipeContainer.setOnRefreshListener {
@@ -68,10 +72,20 @@ open class ProfileFragment : Fragment() {
         );
 
         adapter = PostAdapter(requireContext(), allPosts)
+
         rvPosts.adapter = adapter
         rvPosts.layoutManager = LinearLayoutManager(requireContext())
 
         queryPosts()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
+            adapter.notifyDataSetChanged()
+            rvPosts.smoothScrollToPosition(0)
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     open fun queryPosts() {
@@ -81,6 +95,7 @@ open class ProfileFragment : Fragment() {
 
         // Find all Post objects
         query.include(Posts.KEY_USER)
+        query.include(Posts.KEY_ROUTINE)
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(Posts.KEY_USER, ParseUser.getCurrentUser())
         query.findInBackground { posts, e ->
@@ -88,12 +103,6 @@ open class ProfileFragment : Fragment() {
                 Log.e(TAG, "ERROR")
             } else {
                 if (posts != null) {
-                    for (post in posts) {
-//                        Log.i(
-//                            TAG, "Post: " + post.getDescription() + ", Username: " +
-//                                    post.getUser()?.username
-//                        )
-                    }
                     allPosts.clear()
                     allPosts.addAll(posts)
                     adapter.notifyDataSetChanged()
