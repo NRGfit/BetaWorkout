@@ -26,9 +26,11 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val routineExercise = exercises.get(position)
         holder.bind(routineExercise)
-//        holder.btDelete.setOnClickListener {
-//            exercises.removeAt(position)
-//        }
+        holder.btDelete.setOnClickListener {
+            exercises.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, exercises.size)
+        }
     }
 
     override fun getItemCount(): Int {
