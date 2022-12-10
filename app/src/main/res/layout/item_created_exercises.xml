@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="12dp"
+    android:background="@drawable/border_background"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/exerciseName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Deadlift"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivExercise"
+        android:layout_width="136.8dp"
+        android:layout_height="135.6dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/exerciseNotes"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/exerciseSetsDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Sets"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseNotes" />
+
+    <EditText
+        android:id="@+id/exerciseSets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="12dp"
+        android:text="3"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseSetsDisplay" />
+
+    <TextView
+        android:id="@+id/exerciseRepsDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Reps"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/exerciseSetsDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseNotes" />
+
+    <EditText
+        android:id="@+id/exerciseReps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="12dp"
+        android:text="5"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/exerciseRepsDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseRepsDisplay" />
+
+    <TextView
+        android:id="@+id/exerciseWeightsDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Weights"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/exerciseRepsDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseNotes" />
+
+    <EditText
+        android:id="@+id/exerciseWeights"
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="12dp"
+        android:text="135, 185, 225"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/exerciseWeightsDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseWeightsDisplay" />
+
+    <EditText
+        android:id="@+id/exerciseNotes"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:textSize="16dp"
+        android:text="80-85% 1RM, chest up"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

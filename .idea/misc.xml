@@ -6,6 +6,7 @@
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/border_background.xml" value="0.1125" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/drawable/gradient.xml" value="0.1125" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_compose.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_compose_routine.xml" value="0.18704710144927536" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_create_user.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_login.xml" value="0.1503623188405797" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_profile.xml" value="0.20652173913043478" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_routine.xml" value="0.19375" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/fragment_workout.xml" value="0.25" />
+        <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/item_created_exercises.xml" value="0.33" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/item_exercises.xml" value="0.19375" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/item_post.xml" value="0.22" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/item_routine.xml" value="0.19375" />

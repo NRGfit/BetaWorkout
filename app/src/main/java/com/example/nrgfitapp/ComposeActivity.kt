@@ -65,10 +65,10 @@ class ComposeActivity : AppCompatActivity() {
         post.setUser(user)
         post.saveInBackground { exception ->
             if (exception != null) {
-                Log.e(TAG, "ERROW HILE SAVING")
+                Log.e(TAG, "ERROR WHILE SAVING")
                 exception.printStackTrace()
             } else {
-                Log.i(TAG, "Succes saving post")
+                Log.i(TAG, "Success saving post")
             }
         }
     }
