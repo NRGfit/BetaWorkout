@@ -46,6 +46,7 @@ class ComposeRoutineActivity : AppCompatActivity() {
             addExerciseToRV(idMap[menuItem.itemId])
             false
         }
+
         btnAddExercise.setOnClickListener {
             showPopUp.show()
         }
