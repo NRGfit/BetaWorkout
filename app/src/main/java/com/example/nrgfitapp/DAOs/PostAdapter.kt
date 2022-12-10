@@ -59,9 +59,9 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
             tvUsername.text = post.getUser()?.username
             tvDescription.text = post.getDescription()
             itemCreatedAt.text = post.getFormattedTimestamp(post.createdAt)
+            rvRoutinePost.adapter = routineAdapter
+            rvRoutinePost.layoutManager = LinearLayoutManager(itemView.context)
             if(post.getRoutine() != null) {
-                rvRoutinePost.adapter = routineAdapter
-                rvRoutinePost.layoutManager = LinearLayoutManager(itemView.context)
                 routines.clear()
                 routines.add(post.getRoutine() as Routine)
                 routineAdapter.notifyDataSetChanged()

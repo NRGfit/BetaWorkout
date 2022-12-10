@@ -1,10 +1,7 @@
 package com.example.nrgfitapp
 
 import android.app.Application
-import com.example.nrgfitapp.DAOs.Exercise
-import com.example.nrgfitapp.DAOs.Posts
-import com.example.nrgfitapp.DAOs.Routine
-import com.example.nrgfitapp.DAOs.RoutineExercise
+import com.example.nrgfitapp.DAOs.*
 import com.parse.Parse
 import com.parse.ParseObject
 
@@ -16,6 +13,7 @@ class NRGfitParseApp : Application() {
         ParseObject.registerSubclass(Routine::class.java)
         ParseObject.registerSubclass(RoutineExercise::class.java)
         ParseObject.registerSubclass(Exercise::class.java)
+        ParseObject.registerSubclass(UsableRoutines::class.java)
 
 
         Parse.initialize(

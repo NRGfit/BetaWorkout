@@ -14,6 +14,7 @@ import com.example.nrgfitapp.ComposeActivity
 import com.example.nrgfitapp.ComposeRoutineActivity
 import com.example.nrgfitapp.DAOs.Routine
 import com.example.nrgfitapp.DAOs.RoutineAdapter
+import com.example.nrgfitapp.DAOs.UsableRoutines
 import com.example.nrgfitapp.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.parse.ParseQuery
@@ -73,19 +74,22 @@ class RoutineFragment : Fragment() {
 
     open fun queryRoutines() {
         // Specify which class to query
-        val query: ParseQuery<Routine> = ParseQuery.getQuery(Routine::class.java)
+        val query: ParseQuery<UsableRoutines> = ParseQuery.getQuery(UsableRoutines::class.java)
 
         // Find all Routine objects
-        query.include(Routine.KEY_USER)
+        query.include(UsableRoutines.KEY_ROUTINE)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(Routine.KEY_USER, ParseUser.getCurrentUser())
-        query.findInBackground { routines, e ->
+        query.whereEqualTo(UsableRoutines.KEY_USER, ParseUser.getCurrentUser())
+        query.findInBackground { usableRoutines, e ->
             if (e != null) {
                 Log.e(TAG, "ERROR")
             } else {
-                if (routines != null) {
+                if (usableRoutines != null) {
                     allRoutines.clear()
-                    allRoutines.addAll(routines)
+                    for(ur in usableRoutines){
+                        allRoutines.add(ur.getRoutine() as Routine)
+                    }
+
                     adapter.notifyDataSetChanged()
                     swipeContainer.isRefreshing = false
                 }

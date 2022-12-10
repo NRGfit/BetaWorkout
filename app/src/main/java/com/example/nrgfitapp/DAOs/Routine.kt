@@ -24,19 +24,11 @@ class Routine : ParseObject() {
         put(KEY_DESCRIPTION, description)
     }
 
-    fun getUser(): ParseUser? {
-        return getParseUser(KEY_USER)
-    }
-    fun setUser(user: ParseUser){
-        put(KEY_USER, user)
-    }
-
     fun getFormattedTimestamp(createdAt: Date): String? {
         return TimeFormatter.getTimeDifference(createdAt.toString())
     }
     companion object {
         const val KEY_ROUTINE_NAME = "routineName"
-        const val KEY_USER = "username"
         const val KEY_DESCRIPTION = "description"
     }
 }
