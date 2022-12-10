@@ -35,6 +35,8 @@ class ComposeRoutineActivity : AppCompatActivity() {
         routineCreateRecyclerView = findViewById(R.id.routineCreateRecyclerView)
 
 
+
+
     }
 
     fun submitRoutine(description: String, routineName: String, exercises: MutableList<Exercise>) {

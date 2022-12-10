@@ -14,6 +14,8 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Routine Name"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/white"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textColorHint="@color/white"
@@ -56,6 +58,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:hint="Description"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
