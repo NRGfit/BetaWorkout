@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -16,15 +17,18 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 
-class RoutineCreateExerciseAdapter(val context: Context, val exercises: List<RoutineExercise>) : RecyclerView.Adapter<RoutineCreateExerciseAdapter.ViewHolder>(){
+class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableList<String>) : RecyclerView.Adapter<RoutineCreateExerciseAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_exercises, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_created_exercises, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val routineExercise = exercises.get(position)
         holder.bind(routineExercise)
+//        holder.btDelete.setOnClickListener {
+//            exercises.removeAt(position)
+//        }
     }
 
     override fun getItemCount(): Int {
@@ -34,23 +38,18 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: List<Rou
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvExerciseName: TextView
         val ivExercise: ImageView
-        val tvExerciseSets: EditText
-        val tvExerciseReps: EditText
-        val tvExerciseWeights: EditText
-        val tvExerciseNotes: EditText
+        val btDelete: Button
 
         init{
             tvExerciseName = itemView.findViewById(R.id.exerciseName)
             ivExercise = itemView.findViewById(R.id.ivExercise)
-            tvExerciseSets = itemView.findViewById(R.id.exerciseSets)
-            tvExerciseReps = itemView.findViewById(R.id.exerciseReps)
-            tvExerciseWeights = itemView.findViewById(R.id.exerciseWeights)
-            tvExerciseNotes = itemView.findViewById(R.id.exerciseNotes)
+            btDelete = itemView.findViewById<Button>(R.id.btDelete)
         }
+
         var TAG = "test2"
-        fun bind(routineExercise: RoutineExercise){
-            val exercise: Exercise = routineExercise.getParseObject(RoutineExercise.KEY_EXERCISE)?.fetch() as Exercise
-            val exerciseID: String? = exercise.getExerciseDBID()
+        fun bind(routineExercise: String){
+            val exerciseID: String = routineExercise
+
             val exerciseInfo : JSONObject
             if (exerciseID != null) {
                 exerciseInfo = getExercise(exerciseID, itemView)!!

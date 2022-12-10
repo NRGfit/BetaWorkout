@@ -3,17 +3,14 @@ package com.example.nrgfitapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import androidx.appcompat.widget.PopupMenu
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nrgfitapp.DAOs.Exercise
-import com.example.nrgfitapp.DAOs.Posts
-import com.example.nrgfitapp.DAOs.Routine
-import com.parse.ParseUser
+import com.example.nrgfitapp.DAOs.*
+import com.parse.ParseQuery
 
 class ComposeRoutineActivity : AppCompatActivity() {
     val TAG = "ComposeRoutineActivity"
@@ -23,6 +20,8 @@ class ComposeRoutineActivity : AppCompatActivity() {
     lateinit var btnAddExercise: Button
     lateinit var btnAddRoutine: Button
     lateinit var routineCreateRecyclerView: RecyclerView
+    lateinit var adapter: RoutineCreateExerciseAdapter
+    var exercisesToAdd: MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +33,52 @@ class ComposeRoutineActivity : AppCompatActivity() {
         btnAddRoutine = findViewById(R.id.btnAddRoutine)
         routineCreateRecyclerView = findViewById(R.id.routineCreateRecyclerView)
 
+        val showPopUp = PopupMenu(
+            this,
+            btnAddExercise
+        )
 
+        showPopUp.inflate(R.menu.popup_exercises)
 
+        val idMap = setExercisesInPopup(showPopUp)
 
+        showPopUp.setOnMenuItemClickListener { menuItem ->
+            addExerciseToRV(idMap[menuItem.itemId])
+            false
+        }
+        btnAddExercise.setOnClickListener {
+            showPopUp.show()
+        }
+
+        adapter = RoutineCreateExerciseAdapter(this, exercisesToAdd)
+        routineCreateRecyclerView.adapter = adapter
+        routineCreateRecyclerView.layoutManager = LinearLayoutManager(this)
+
+    }
+
+    fun setExercisesInPopup(popupMenu: PopupMenu) : MutableList<String>{
+        val idMap: MutableList<String> = mutableListOf()
+        val query: ParseQuery<Exercise> = ParseQuery.getQuery(Exercise::class.java)
+        query.findInBackground { exercises, e ->
+            if (e != null) {
+                e.printStackTrace()
+                Log.e(TAG, "Error fetching posts")
+            } else {
+                if (exercises != null) {
+                    for(i in 0 until exercises.size){
+                        popupMenu.menu.add(Menu.NONE, i, i, exercises[i].getExerciseName())
+                        exercises[i].getExerciseDBID()?.let { idMap.add(i, it) }
+                    }
+                }
+            }
+        }
+        return idMap
+    }
+
+    fun addExerciseToRV(exercise: String){
+        //Log.i(TAG, exercise)
+        exercisesToAdd.add(exercise)
+        adapter.notifyDataSetChanged()
     }
 
     fun submitRoutine(description: String, routineName: String, exercises: MutableList<Exercise>) {
