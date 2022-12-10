@@ -43,6 +43,8 @@ class ComposeActivity : AppCompatActivity() {
             }
         }
 
+
+
         btnPost.setOnClickListener {
             val postContent = tvPostCompose.text.toString()
 
