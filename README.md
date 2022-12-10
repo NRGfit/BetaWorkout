@@ -24,7 +24,6 @@ Product Spec
 
    Required Must-have Stories
 
-* User logs in to access previous chats and preference settings.
 * User creates workout plan.
 * View table for workout plans that are made public.
 * Profile pages for each user.
