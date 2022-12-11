@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nrgfitapp.R
+import com.example.nrgfitapp.ViewOtherProfileActivity
+import com.example.nrgfitapp.ViewRoutineActivity
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
@@ -27,6 +29,11 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
         holder.bind(post)
+        holder.ivProfilePic.setOnClickListener{
+            val intent = Intent(context, ViewOtherProfileActivity::class.java)
+            intent.putExtra("User", post.getUser()?.objectId)
+            context.startActivity(intent)
+        }
         if(posts[position].getUsableRoutine() != null) {
             holder.button_share.setOnClickListener {
                 val usableRoutine: UsableRoutines =
