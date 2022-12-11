@@ -56,10 +56,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#2196F3"
         android:text="Add Routine"
+        app:layout_constraintBottom_toTopOf="@+id/tvPostCompose"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnRoutineRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#2196F3"
+        android:text="Remove Routine"
         app:layout_constraintBottom_toTopOf="@+id/tvPostCompose"
         app:layout_constraintEnd_toEndOf="parent" />
 

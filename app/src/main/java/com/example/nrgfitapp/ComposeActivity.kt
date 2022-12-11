@@ -26,6 +26,7 @@ class ComposeActivity : AppCompatActivity() {
     lateinit var tvPostCompose: EditText
     lateinit var btnPost: Button
     lateinit var btnRoutineDrop: Button
+    lateinit var btnRoutineRemove: Button
     lateinit var tvCharCount: TextView
     lateinit var adapter: RoutineAdapter
     lateinit var routinePost: RecyclerView
@@ -38,6 +39,7 @@ class ComposeActivity : AppCompatActivity() {
 
         tvPostCompose = findViewById(R.id.tvPostCompose)
         btnPost = findViewById(R.id.btnPost)
+        btnRoutineRemove = findViewById(R.id.btnRoutineRemove)
         btnRoutineDrop = findViewById(R.id.btnRoutineDrop)
         tvCharCount = findViewById(R.id.tvCharCount)
         routinePost = findViewById(R.id.routinePost)
@@ -60,6 +62,11 @@ class ComposeActivity : AppCompatActivity() {
             showPopUp.show()
         }
 
+        btnRoutineRemove.setOnClickListener {
+            routineToAdd.clear()
+            adapter.notifyDataSetChanged()
+        }
+
         tvPostCompose.doAfterTextChanged {
             val length = tvPostCompose.text.toString().length
             if(length > 280) {
@@ -70,7 +77,6 @@ class ComposeActivity : AppCompatActivity() {
                 tvCharCount.setTextColor(argb(255,0,0,255))
             }
         }
-
 
 
         btnPost.setOnClickListener {
