@@ -95,7 +95,7 @@ open class ProfileFragment : Fragment() {
 
         // Find all Post objects
         query.include(Posts.KEY_USER)
-        query.include(Posts.KEY_ROUTINE)
+        query.include(Posts.KEY_USABLE_ROUTINE)
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(Posts.KEY_USER, ParseUser.getCurrentUser())
         query.findInBackground { posts, e ->

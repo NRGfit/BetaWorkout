@@ -26,7 +26,7 @@ class RoutineFragment : Fragment() {
     lateinit var adapter: RoutineAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
     lateinit var btFab: FloatingActionButton
-    var allRoutines: MutableList<Routine> = mutableListOf()
+    var allRoutines: MutableList<UsableRoutines> = mutableListOf()
 
     val TAG = "WorkoutCreateFragment"
     var REQUEST_CODE = 10;
@@ -86,10 +86,7 @@ class RoutineFragment : Fragment() {
             } else {
                 if (usableRoutines != null) {
                     allRoutines.clear()
-                    for(ur in usableRoutines){
-                        allRoutines.add(ur.getRoutine() as Routine)
-                    }
-
+                    allRoutines.addAll(usableRoutines)
                     adapter.notifyDataSetChanged()
                     swipeContainer.isRefreshing = false
                 }

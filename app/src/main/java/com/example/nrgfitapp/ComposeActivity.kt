@@ -14,6 +14,7 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.nrgfitapp.DAOs.Exercise
 import com.example.nrgfitapp.DAOs.Posts
 import com.example.nrgfitapp.DAOs.Routine
+import com.example.nrgfitapp.DAOs.UsableRoutines
 import com.parse.ParseFile
 import com.parse.ParseQuery
 import com.parse.ParseUser
@@ -46,7 +47,7 @@ class ComposeActivity : AppCompatActivity() {
 
         showPopUp.inflate(R.menu.popup_exercises)
 
-        //val idMap = setRoutinesInPopup(showPopUp)
+        val idMap = setRoutinesInPopup(showPopUp)
 
         btnRoutineDrop.setOnClickListener {
             showPopUp.show()
@@ -83,7 +84,7 @@ class ComposeActivity : AppCompatActivity() {
 
     fun setRoutinesInPopup(popupMenu: PopupMenu) : MutableList<String>{
         val idMap: MutableList<String> = mutableListOf()
-        val query: ParseQuery<Routine> = ParseQuery.getQuery(Routine::class.java)
+        val query: ParseQuery<UsableRoutines> = ParseQuery.getQuery(UsableRoutines::class.java)
         query.findInBackground { routines, e ->
             if (e != null) {
                 e.printStackTrace()
@@ -91,7 +92,7 @@ class ComposeActivity : AppCompatActivity() {
             } else {
                 if (routines != null) {
                     for(i in 0 until routines.size){
-                        popupMenu.menu.add(Menu.NONE, i, i, routines[i].getRoutineName())
+                        popupMenu.menu.add(Menu.NONE, i, i, (routines[i].getRoutine() as Routine).getRoutineName())
                         //routines[i].getExerciseDBID()?.let { idMap.add(i, it) }
                     }
                 }

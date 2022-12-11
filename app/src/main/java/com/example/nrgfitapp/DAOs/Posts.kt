@@ -19,11 +19,11 @@ class Posts : ParseObject() {
         put(KEY_DESCRIPTION, description)
     }
 
-    fun getRoutine(): ParseObject? {
-        return getParseObject(KEY_ROUTINE)
+    fun getUsableRoutine(): ParseObject? {
+        return getParseObject(KEY_USABLE_ROUTINE)
     }
-    fun setRoutine(routine: ParseObject){
-        put(KEY_ROUTINE, routine)
+    fun setUsableRoutine(routine: ParseObject){
+        put(KEY_USABLE_ROUTINE, routine)
     }
 
     fun getUser(): ParseUser? {
@@ -38,7 +38,7 @@ class Posts : ParseObject() {
     }
     companion object {
         const val KEY_DESCRIPTION = "description"
-        const val KEY_ROUTINE = "Routine"
+        const val KEY_USABLE_ROUTINE = "UsableRoutine"
         const val KEY_USER = "username"
     }
 }

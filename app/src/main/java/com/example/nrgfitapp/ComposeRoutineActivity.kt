@@ -1,5 +1,6 @@
 package com.example.nrgfitapp
 
+import android.graphics.drawable.shapes.RoundRectShape
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -82,7 +83,26 @@ class ComposeRoutineActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-    fun submitRoutine(description: String, routineName: String, exercises: MutableList<Exercise>) {
+    fun getRoutineExercises(): MutableList<RoutineExercise>{
+        val routineExercises: MutableList<RoutineExercise> = mutableListOf()
+
+        val childCount = routineCreateRecyclerView.getChildCount()
+        for (i in 0 until childCount) {
+            val holder : RoutineCreateExerciseAdapter.ViewHolder =
+                routineCreateRecyclerView.getChildViewHolder(routineCreateRecyclerView.getChildAt(i))
+                        as RoutineCreateExerciseAdapter.ViewHolder;
+            val routineExercise : RoutineExercise = RoutineExercise()
+
+            routineExercise.setNotes(holder.tvExerciseNotes.text.toString())
+            routineExercise.setSets(holder.tvExerciseSets.text.toString().toInt())
+            routineExercise.setReps(holder.tvExerciseReps.text.toString().toInt())
+            routineExercise.setWeights(holder.tvExerciseWeights.text.toString())
+
+        }
+        return routineExercises
+    }
+
+    fun submitRoutine(description: String, routineName: String, exercises: MutableList<RoutineExercise>) {
         val routine = Routine()
         routine.setDescription(description)
         routine.setRoutineName(routineName)

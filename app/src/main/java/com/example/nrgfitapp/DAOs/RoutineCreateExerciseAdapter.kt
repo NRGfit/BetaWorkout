@@ -40,11 +40,19 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableL
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvExerciseName: TextView
         val ivExercise: ImageView
+        val tvExerciseSets: EditText
+        val tvExerciseReps: EditText
+        val tvExerciseWeights: EditText
+        val tvExerciseNotes: EditText
         val btDelete: Button
 
         init{
             tvExerciseName = itemView.findViewById(R.id.exerciseName)
             ivExercise = itemView.findViewById(R.id.ivExercise)
+            tvExerciseSets = itemView.findViewById(R.id.exerciseSets)
+            tvExerciseReps = itemView.findViewById(R.id.exerciseReps)
+            tvExerciseWeights = itemView.findViewById(R.id.exerciseWeights)
+            tvExerciseNotes = itemView.findViewById(R.id.exerciseNotes)
             btDelete = itemView.findViewById<Button>(R.id.btDelete)
         }
 

@@ -44,7 +44,7 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         val itemCreatedAt: TextView
         val rvRoutinePost: RecyclerView
         val routineAdapter: RoutineAdapter
-        var routines: MutableList<Routine> = mutableListOf()
+        var routines: MutableList<UsableRoutines> = mutableListOf()
 
         init{
             tvUsername = itemView.findViewById(R.id.tvUsername)
@@ -61,9 +61,9 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
             itemCreatedAt.text = post.getFormattedTimestamp(post.createdAt)
             rvRoutinePost.adapter = routineAdapter
             rvRoutinePost.layoutManager = LinearLayoutManager(itemView.context)
-            if(post.getRoutine() != null) {
+            if(post.getUsableRoutine() != null) {
                 routines.clear()
-                routines.add(post.getRoutine() as Routine)
+                routines.add(post.getUsableRoutine() as UsableRoutines)
                 routineAdapter.notifyDataSetChanged()
             }
 
