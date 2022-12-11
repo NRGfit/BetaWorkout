@@ -44,12 +44,16 @@ class ComposeRoutineActivity : AppCompatActivity() {
         val idMap = setExercisesInPopup(showPopUp)
 
         showPopUp.setOnMenuItemClickListener { menuItem ->
-            addExerciseToRV(idMap[menuItem.itemId])
+            idMap[menuItem.itemId].getExerciseDBID()?.let { addExerciseToRV(it) }
             false
         }
 
         btnAddExercise.setOnClickListener {
             showPopUp.show()
+        }
+
+        btnAddRoutine.setOnClickListener{
+            submitRoutine(tvDescription.text.toString(), tvRoutineName.text.toString(), getRoutineExercises())
         }
 
         adapter = RoutineCreateExerciseAdapter(this, exercisesToAdd)
@@ -58,8 +62,8 @@ class ComposeRoutineActivity : AppCompatActivity() {
 
     }
 
-    fun setExercisesInPopup(popupMenu: PopupMenu) : MutableList<String>{
-        val idMap: MutableList<String> = mutableListOf()
+    fun setExercisesInPopup(popupMenu: PopupMenu) : MutableList<Exercise>{
+        val idMap: MutableList<Exercise> = mutableListOf()
         val query: ParseQuery<Exercise> = ParseQuery.getQuery(Exercise::class.java)
         query.findInBackground { exercises, e ->
             if (e != null) {
@@ -69,7 +73,7 @@ class ComposeRoutineActivity : AppCompatActivity() {
                 if (exercises != null) {
                     for(i in 0 until exercises.size){
                         popupMenu.menu.add(Menu.NONE, i, i, exercises[i].getExerciseName())
-                        exercises[i].getExerciseDBID()?.let { idMap.add(i, it) }
+                        idMap.add(exercises[i])
                     }
                 }
             }
@@ -92,7 +96,8 @@ class ComposeRoutineActivity : AppCompatActivity() {
                 routineCreateRecyclerView.getChildViewHolder(routineCreateRecyclerView.getChildAt(i))
                         as RoutineCreateExerciseAdapter.ViewHolder;
             val routineExercise : RoutineExercise = RoutineExercise()
-
+            for()
+            holder.tvExerciseName
             routineExercise.setNotes(holder.tvExerciseNotes.text.toString())
             routineExercise.setSets(holder.tvExerciseSets.text.toString().toInt())
             routineExercise.setReps(holder.tvExerciseReps.text.toString().toInt())
@@ -103,16 +108,17 @@ class ComposeRoutineActivity : AppCompatActivity() {
     }
 
     fun submitRoutine(description: String, routineName: String, exercises: MutableList<RoutineExercise>) {
-        val routine = Routine()
-        routine.setDescription(description)
-        routine.setRoutineName(routineName)
-        routine.saveInBackground { exception ->
-            if (exception != null) {
-                Log.e(TAG, "ERROR WHILE SAVING")
-                exception.printStackTrace()
-            } else {
-                Log.i(TAG, "Success saving post")
-            }
-        }
+        Log.i(TAG, "Reached")
+//        val routine = Routine()
+//        routine.setDescription(description)
+//        routine.setRoutineName(routineName)
+//        routine.saveInBackground { exception ->
+//            if (exception != null) {
+//                Log.e(TAG, "ERROR WHILE SAVING")
+//                exception.printStackTrace()
+//            } else {
+//                Log.i(TAG, "Success saving post")
+//            }
+//        }
     }
 }

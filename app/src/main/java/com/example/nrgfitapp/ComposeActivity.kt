@@ -135,6 +135,8 @@ class ComposeActivity : AppCompatActivity() {
         val post = Posts()
         post.setDescription(description)
         post.setUser(user)
+        if(!routineToAdd.isEmpty())
+            post.setUsableRoutine(routineToAdd[0])
         post.saveInBackground { exception ->
             if (exception != null) {
                 Log.e(TAG, "ERROR WHILE SAVING")
