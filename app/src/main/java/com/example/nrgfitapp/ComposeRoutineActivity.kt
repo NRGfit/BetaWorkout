@@ -103,13 +103,11 @@ class ComposeRoutineActivity : AppCompatActivity() {
     fun getRoutineExercises(idmap: MutableList<Exercise>): MutableList<RoutineExercise>? {
         val routineExercises: MutableList<RoutineExercise> = mutableListOf()
 
-        val childCount = adapter.itemCount
-        if(childCount == 0){
+        if(adapter.itemCount == 0){
             Toast.makeText(this, "Add some Exercises first!", Toast.LENGTH_SHORT).show()
             return null
         }
-        for (i in 0 until childCount) {
-            val holder : RoutineCreateExerciseAdapter.ViewHolder = adapter.holders[i]
+        for (holder in adapter.holders) {
             val routineExercise : RoutineExercise = RoutineExercise()
 
             var exercise: Exercise? = null

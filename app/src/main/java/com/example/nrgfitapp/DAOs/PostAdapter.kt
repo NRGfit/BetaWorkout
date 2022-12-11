@@ -27,38 +27,42 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
         holder.bind(post)
-//        if(posts[position].getUsableRoutine() != null) {
-//            holder.button_share.setOnClickListener {
-//                val usableRoutine: UsableRoutines =
-//                    posts[position].getUsableRoutine() as UsableRoutines
-//
-//                val query: ParseQuery<UsableRoutines> =
-//                    ParseQuery.getQuery(UsableRoutines::class.java)
-//                query.addDescendingOrder("createdAt")
-//                query.whereEqualTo("objectId", usableRoutine.objectId)
-//                query.findInBackground { usableRoutines, e ->
-//                    if (e != null) {
-//                        Log.e(TAG, "ERROR")
-//                    } else {
-//                        if (usableRoutines != null) {
-//                            Toast.makeText(
-//                                context,
-//                                "You already have this Workout",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        } else {
-//                            val usableRoutine2 = UsableRoutines()
-//                            usableRoutine.getRoutine()
-//                                ?.let { it1 -> usableRoutine2.setRoutine(it1) }
-//                            usableRoutine2.setUser(ParseUser.getCurrentUser())
-//                            usableRoutine.getOwner()?.let { it1 -> usableRoutine2.setOwner(it1) }
-//                            usableRoutine.save()
-//                            Log.i(TAG, "Saved UsableRoutine")
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        if(posts[position].getUsableRoutine() != null) {
+            holder.button_share.setOnClickListener {
+                val usableRoutine: UsableRoutines =
+                    posts[position].getUsableRoutine() as UsableRoutines
+                usableRoutine.getRoutine()?.let { it1 -> Log.i(TAG, it1.objectId) }
+                val query: ParseQuery<UsableRoutines> =
+                    ParseQuery.getQuery(UsableRoutines::class.java)
+
+                query.include(UsableRoutines.KEY_ROUTINE)
+                query.include(UsableRoutines.KEY_USER)
+                query.addDescendingOrder("createdAt")
+                query.whereEqualTo(UsableRoutines.KEY_ROUTINE, usableRoutine.getRoutine())
+                query.whereEqualTo(UsableRoutines.KEY_USER, ParseUser.getCurrentUser())
+                query.findInBackground { usableRoutines, e ->
+                    if (e != null) {
+                        Log.e(TAG, "ERROR")
+                    } else {
+                        if (usableRoutines.size > 0) {
+                            Toast.makeText(
+                                context,
+                                "You already have this Workout",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            val usableRoutineNew = UsableRoutines()
+                            usableRoutine.getRoutine()
+                                ?.let { it1 -> usableRoutineNew.setRoutine(it1) }
+                            usableRoutineNew.setUser(ParseUser.getCurrentUser())
+                            usableRoutine.getOwner()?.let { it1 -> usableRoutineNew.setOwner(it1) }
+                            usableRoutineNew.save()
+                            Log.i(TAG, "Saved UsableRoutine")
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
