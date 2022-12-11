@@ -18,6 +18,8 @@ import okhttp3.Request
 import org.json.JSONObject
 
 class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableList<String>) : RecyclerView.Adapter<RoutineCreateExerciseAdapter.ViewHolder>(){
+    val holders: MutableList<ViewHolder> = mutableListOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_created_exercises, parent, false)
         return ViewHolder(view)
@@ -26,11 +28,15 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val routineExercise = exercises.get(position)
         holder.bind(routineExercise)
+        holder.index = position
         holder.btDelete.setOnClickListener {
             exercises.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, exercises.size)
         }
+
+        if(holders.size - 1 < position)
+            holders.add(holder)
     }
 
     override fun getItemCount(): Int {
@@ -45,6 +51,7 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableL
         val tvExerciseWeights: EditText
         val tvExerciseNotes: EditText
         val btDelete: Button
+        var index: Int
 
         init{
             tvExerciseName = itemView.findViewById(R.id.exerciseName)
@@ -54,6 +61,7 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableL
             tvExerciseWeights = itemView.findViewById(R.id.exerciseWeights)
             tvExerciseNotes = itemView.findViewById(R.id.exerciseNotes)
             btDelete = itemView.findViewById<Button>(R.id.btDelete)
+            index = -1
         }
 
         var TAG = "test2"
@@ -66,11 +74,6 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableL
                 tvExerciseName.text = exerciseInfo.getString("name")
                 Glide.with(itemView.context).asGif().load(exerciseInfo.getString("gifUrl")).into(ivExercise)
             }
-//            tvExerciseSets.text = routineExercise.getSets().toString()
-//            tvExerciseReps.text = routineExercise.getReps().toString()
-//            tvExerciseWeights.text = routineExercise.getWeights()
-//            tvExerciseNotes.text = routineExercise.getNotes()
-
         }
 
         fun getExercise(dbid: String, view: View): JSONObject? {

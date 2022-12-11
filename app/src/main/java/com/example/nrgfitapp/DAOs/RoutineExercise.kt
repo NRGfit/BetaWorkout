@@ -20,7 +20,7 @@ class RoutineExercise : ParseObject() {
     fun getExercise(): ParseObject? {
         return getParseUser(KEY_EXERCISE)
     }
-    fun setExercise(exercise: RoutineExercise){
+    fun setExercise(exercise: Exercise){
         put(KEY_EXERCISE, exercise)
     }
 
