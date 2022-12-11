@@ -1,6 +1,5 @@
 package com.example.nrgfitapp
 
-import android.graphics.drawable.shapes.RoundRectShape
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -53,7 +52,7 @@ class ComposeRoutineActivity : AppCompatActivity() {
         }
 
         btnAddRoutine.setOnClickListener{
-            submitRoutine(tvDescription.text.toString(), tvRoutineName.text.toString(), getRoutineExercises())
+                submitRoutine(tvDescription.text.toString(), tvRoutineName.text.toString(), getRoutineExercises(idMap))
         }
 
         adapter = RoutineCreateExerciseAdapter(this, exercisesToAdd)
@@ -87,7 +86,7 @@ class ComposeRoutineActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-    fun getRoutineExercises(): MutableList<RoutineExercise>{
+    fun getRoutineExercises(idmap: MutableList<Exercise>): MutableList<RoutineExercise>{
         val routineExercises: MutableList<RoutineExercise> = mutableListOf()
 
         val childCount = routineCreateRecyclerView.getChildCount()
@@ -96,8 +95,13 @@ class ComposeRoutineActivity : AppCompatActivity() {
                 routineCreateRecyclerView.getChildViewHolder(routineCreateRecyclerView.getChildAt(i))
                         as RoutineCreateExerciseAdapter.ViewHolder;
             val routineExercise : RoutineExercise = RoutineExercise()
-            for()
-            holder.tvExerciseName
+            for(i in 0 until idmap.size) {
+                if (idmap[i].getExerciseName() == holder.tvExerciseName.toString()) {
+                    Log.i(TAG, holder.tvExerciseName.toString())
+                }
+            }
+                // check holder with idMap to see if matches
+                // if so then store the index
             routineExercise.setNotes(holder.tvExerciseNotes.text.toString())
             routineExercise.setSets(holder.tvExerciseSets.text.toString().toInt())
             routineExercise.setReps(holder.tvExerciseReps.text.toString().toInt())
