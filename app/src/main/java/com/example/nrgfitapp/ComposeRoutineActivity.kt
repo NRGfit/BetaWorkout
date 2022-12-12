@@ -44,7 +44,7 @@ class ComposeRoutineActivity : AppCompatActivity() {
 
         showPopUp.inflate(R.menu.popup_exercises)
 
-        val `idMap` = setExercisesInPopup(showPopUp)
+        val idMap = setExercisesInPopup(showPopUp)
 
         showPopUp.setOnMenuItemClickListener { menuItem ->
             idMap[menuItem.itemId].getExerciseDBID()?.let { addExerciseToRV(it) }

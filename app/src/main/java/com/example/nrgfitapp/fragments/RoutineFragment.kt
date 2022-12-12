@@ -1,12 +1,16 @@
 package com.example.nrgfitapp.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -61,15 +65,47 @@ class RoutineFragment : Fragment() {
         btFab = view.findViewById(R.id.createRoutine)
         btFabDel = view.findViewById(R.id.deleteRoutine)
 
+        val showPopUp = PopupMenu(
+            requireContext(),
+            btFabDel
+        )
+
+        showPopUp.inflate(R.menu.popup_exercises)
+
+        var idMap = setRoutinesInPopup(showPopUp)
+
+        showPopUp.setOnMenuItemClickListener { menuItem ->
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage("Are you sure you want to Delete?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    Log.i(TAG, "Yes works")
+                    idMap[menuItem.itemId].delete()
+                    idMap.clear()
+                    idMap = setRoutinesInPopup(showPopUp)
+
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    Log.i(TAG, "No works")
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+            false
+        }
+
+
+
+
+
         btFab.setOnClickListener {
             val intent = Intent(this.context, ComposeRoutineActivity::class.java)
             Log.i(TAG, "clicked")
             startActivityForResult(intent, REQUEST_CODE)
         }
         btFabDel.setOnClickListener {
-            val intent = Intent(this.context, ComposeRoutineActivity::class.java)
-            Log.i(TAG, "clicked")
-            startActivityForResult(intent, REQUEST_CODE)
+            showPopUp.show()
         }
 
         adapter = RoutineAdapter(requireContext(), allRoutines)
@@ -100,4 +136,28 @@ class RoutineFragment : Fragment() {
             }
         }
     }
+    fun setRoutinesInPopup(popupMenu: PopupMenu) : MutableList<UsableRoutines>{
+        popupMenu.menu.clear()
+        val routineMap: MutableList<UsableRoutines> = mutableListOf()
+        val query: ParseQuery<UsableRoutines> = ParseQuery.getQuery(UsableRoutines::class.java)
+        query.include(UsableRoutines.KEY_ROUTINE)
+        query.whereEqualTo(UsableRoutines.KEY_USER, ParseUser.getCurrentUser())
+        query.findInBackground { routines, e ->
+            if (e != null) {
+                e.printStackTrace()
+                Log.e(TAG, "Error fetching posts")
+            } else {
+                if (routines != null) {
+                    for(i in 0 until routines.size){
+                        val routine :Routine = (routines[i].getRoutine() as Routine)
+                        popupMenu.menu.add(Menu.NONE, i, i, routine.getRoutineName())
+                        routineMap.add(routines[i])
+                    }
+                }
+            }
+        }
+        return routineMap
+    }
+
+
 }
