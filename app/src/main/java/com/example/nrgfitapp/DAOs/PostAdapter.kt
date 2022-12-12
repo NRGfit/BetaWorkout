@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nrgfitapp.R
 import com.example.nrgfitapp.ViewOtherProfileActivity
-import com.example.nrgfitapp.ViewRoutineActivity
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
@@ -29,6 +28,10 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
         holder.bind(post)
+        holder.button_like.setOnClickListener {
+            queryLikes(posts[position])
+
+        }
         holder.ivProfilePic.setOnClickListener{
             val intent = Intent(context, ViewOtherProfileActivity::class.java)
             intent.putExtra("User", post.getUser()?.objectId)
@@ -93,6 +96,7 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         val rvRoutinePost: RecyclerView
         val routineAdapter: RoutineAdapter
         val button_share: Button
+        val button_like: Button
         var routines: MutableList<UsableRoutines> = mutableListOf()
 
         init{
@@ -103,6 +107,7 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
             rvRoutinePost = itemView.findViewById(R.id.rv_RoutinePost)
             routineAdapter = RoutineAdapter(itemView.context, routines)
             button_share = itemView.findViewById<Button>(R.id.button_share)
+            button_like = itemView.findViewById<Button>(R.id.button_like)
         }
         var TAG = "test2"
         fun bind(post: Posts){
@@ -118,6 +123,28 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
             }
 
             Glide.with(itemView.context).load(post.getUser()?.getParseFile("pfp")?.url).into(ivProfilePic)
+        }
+    }
+    open fun queryLikes(post: Posts) {
+        // Specify which class to query
+        val query: ParseQuery<Likes> = ParseQuery.getQuery(Likes::class.java)
+
+        // Find all Routine objects
+        query.include(Likes.KEY_POST)
+        query.include(Likes.KEY_USER)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(Likes.KEY_USER, ParseUser.getCurrentUser())
+        query.whereEqualTo(Likes.KEY_POST, post)
+        query.findInBackground { likes, e ->
+            if (e != null) {
+                Log.e(TAG, "ERROR")
+            } else {
+                if (likes.size == 0) {
+                    Log.i(TAG, "I havent liked  it")
+                } else {
+                    Log.i(TAG, "I have liked  it")
+                }
+            }
         }
     }
 }
