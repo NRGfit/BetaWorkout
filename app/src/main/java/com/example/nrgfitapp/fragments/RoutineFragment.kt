@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.nrgfitapp.ComposeActivity
 import com.example.nrgfitapp.ComposeRoutineActivity
+import com.example.nrgfitapp.DAOs.Likes
 import com.example.nrgfitapp.DAOs.Routine
 import com.example.nrgfitapp.DAOs.RoutineAdapter
 import com.example.nrgfitapp.DAOs.UsableRoutines
@@ -159,5 +160,25 @@ class RoutineFragment : Fragment() {
         return routineMap
     }
 
+    open fun queryLikes() {
+        // Specify which class to query
+        val query: ParseQuery<Likes> = ParseQuery.getQuery(Likes::class.java)
 
+        // Find all Routine objects
+        query.include(Likes.KEY_POST)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(UsableRoutines.KEY_USER, ParseUser.getCurrentUser())
+        query.findInBackground { likes, e ->
+            if (e != null) {
+                Log.e(TAG, "ERROR")
+            } else {
+                if (likes != null) {
+                    allRoutines.clear()
+                    allRoutines.addAll(likes)
+                    adapter.notifyDataSetChanged()
+                    swipeContainer.isRefreshing = false
+                }
+            }
+        }
+    }
 }
