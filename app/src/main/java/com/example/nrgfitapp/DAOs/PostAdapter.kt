@@ -161,24 +161,24 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(Likes.KEY_USER, ParseUser.getCurrentUser())
         query.whereEqualTo(Likes.KEY_POST, post)
-        query.findInBackground { likes, e ->
-            if (e != null) {
-                Log.e(TAG, "ERROR")
+        val likes = query.find()
+        if (likes == null) {
+            Log.e(TAG, "ERROR")
+        } else {
+            if (likes.size == 0) {
+                Log.i(TAG, "I havent liked  it")
+                val like = Likes()
+                like.setPost(post)
+                like.setUser(ParseUser.getCurrentUser())
+                like.save()
+                Log.i(TAG, "Saved like")
             } else {
-                if (likes.size == 0) {
-                    Log.i(TAG, "I havent liked  it")
-                    val like = Likes()
-                    like.setPost(post)
-                    like.setUser(ParseUser.getCurrentUser())
-                    like.save()
-                    Log.i(TAG, "Saved like")
-                } else {
-                    Log.i(TAG, "I have liked  it")
-                    likes[0].delete()
-                    Log.i(TAG, "Like removed")
-                }
+                Log.i(TAG, "I have liked  it")
+                likes[0].delete()
+                Log.i(TAG, "Like removed")
             }
         }
+
     }
 
     fun setLikersInPopup(popupMenu: PopupMenu, post: Posts) : MutableList<ParseUser>{
