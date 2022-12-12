@@ -141,6 +141,11 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
             } else {
                 if (likes.size == 0) {
                     Log.i(TAG, "I havent liked  it")
+                    val like = Likes()
+                    like.setPost(post)
+                    like.setUser(ParseUser.getCurrentUser())
+                    like.save()
+                    Log.i(TAG, "Saved like")
                 } else {
                     Log.i(TAG, "I have liked  it")
                 }
