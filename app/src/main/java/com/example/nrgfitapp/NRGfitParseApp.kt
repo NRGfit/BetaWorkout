@@ -14,7 +14,7 @@ class NRGfitParseApp : Application() {
         ParseObject.registerSubclass(RoutineExercise::class.java)
         ParseObject.registerSubclass(Exercise::class.java)
         ParseObject.registerSubclass(UsableRoutines::class.java)
-
+        ParseObject.registerSubclass(Likes::class.java)
 
         Parse.initialize(
             Parse.Configuration.Builder(this)

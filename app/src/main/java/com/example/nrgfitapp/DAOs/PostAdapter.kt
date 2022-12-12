@@ -27,10 +27,11 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
+        updateNumLikes(post, holder.tvLikes)
         holder.bind(post)
         holder.button_like.setOnClickListener {
             queryLikes(posts[position])
-
+            updateNumLikes(post, holder.tvLikes)
         }
         holder.ivProfilePic.setOnClickListener{
             val intent = Intent(context, ViewOtherProfileActivity::class.java)
@@ -97,6 +98,7 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         val routineAdapter: RoutineAdapter
         val button_share: Button
         val button_like: Button
+        val tvLikes: TextView
         var routines: MutableList<UsableRoutines> = mutableListOf()
 
         init{
@@ -106,8 +108,9 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
             itemCreatedAt = itemView.findViewById(R.id.tvDate)
             rvRoutinePost = itemView.findViewById(R.id.rv_RoutinePost)
             routineAdapter = RoutineAdapter(itemView.context, routines)
-            button_share = itemView.findViewById<Button>(R.id.button_share)
-            button_like = itemView.findViewById<Button>(R.id.button_like)
+            button_share = itemView.findViewById(R.id.button_share)
+            button_like = itemView.findViewById(R.id.button_like)
+            tvLikes = itemView.findViewById(R.id.tvLikes)
         }
         var TAG = "test2"
         fun bind(post: Posts){
@@ -121,9 +124,16 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
                 routines.add(post.getUsableRoutine() as UsableRoutines)
                 routineAdapter.notifyDataSetChanged()
             }
-
             Glide.with(itemView.context).load(post.getUser()?.getParseFile("pfp")?.url).into(ivProfilePic)
         }
+    }
+
+    open fun updateNumLikes(post: Posts, tvLikes: TextView) {
+        val query: ParseQuery<Likes> = ParseQuery.getQuery(Likes::class.java)
+        query.include(Likes.KEY_POST)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(Likes.KEY_POST, post)
+        tvLikes.text = query.count().toString()
     }
     open fun queryLikes(post: Posts) {
         // Specify which class to query
@@ -148,6 +158,8 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
                     Log.i(TAG, "Saved like")
                 } else {
                     Log.i(TAG, "I have liked  it")
+                    likes[0].delete()
+                    Log.i(TAG, "Like removed")
                 }
             }
         }
