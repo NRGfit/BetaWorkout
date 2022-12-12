@@ -96,10 +96,6 @@ class RoutineFragment : Fragment() {
             false
         }
 
-
-
-
-
         btFab.setOnClickListener {
             val intent = Intent(this.context, ComposeRoutineActivity::class.java)
             Log.i(TAG, "clicked")
