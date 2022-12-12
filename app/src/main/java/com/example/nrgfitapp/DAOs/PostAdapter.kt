@@ -27,11 +27,11 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
-        updateNumLikes(post, holder.tvLikes)
+        updateNumLikes(post, holder.tvLikes, holder.button_like)
         holder.bind(post)
         holder.button_like.setOnClickListener {
             queryLikes(posts[position])
-            updateNumLikes(post, holder.tvLikes)
+            updateNumLikes(post, holder.tvLikes, holder.button_like)
         }
         holder.ivProfilePic.setOnClickListener{
             val intent = Intent(context, ViewOtherProfileActivity::class.java)
@@ -124,19 +124,25 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
                 routines.add(post.getUsableRoutine() as UsableRoutines)
                 routineAdapter.notifyDataSetChanged()
             }
+
             Glide.with(itemView.context).load(post.getUser()?.getParseFile("pfp")?.url).into(ivProfilePic)
         }
     }
 
-    open fun updateNumLikes(post: Posts, tvLikes: TextView) {
+    open fun updateNumLikes(post: Posts, tvLikes: TextView, btButton: Button) {
         val query: ParseQuery<Likes> = ParseQuery.getQuery(Likes::class.java)
         query.include(Likes.KEY_POST)
+        query.include(Likes.KEY_USER)
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(Likes.KEY_POST, post)
-        var count = query.count().toString()
+        var count = query.count()
         tvLikes.text =  "$count likes"
+        query.whereEqualTo(Likes.KEY_USER, ParseUser.getCurrentUser())
+        count = query.count()
+        if (count > 0) btButton.setBackgroundColor(0x00FF00)
+
     }
-    open fun queryLikes(post: Posts) {
+    fun queryLikes(post: Posts) {
         // Specify which class to query
         val query: ParseQuery<Likes> = ParseQuery.getQuery(Likes::class.java)
 
