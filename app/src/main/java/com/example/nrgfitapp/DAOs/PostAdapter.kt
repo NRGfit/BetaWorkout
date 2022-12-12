@@ -133,7 +133,8 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         query.include(Likes.KEY_POST)
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(Likes.KEY_POST, post)
-        tvLikes.text = query.count().toString()
+        var count = query.count().toString()
+        tvLikes.text =  "$count likes"
     }
     open fun queryLikes(post: Posts) {
         // Specify which class to query
