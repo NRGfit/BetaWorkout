@@ -130,7 +130,8 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         tvLikes.text =  "$count likes"
         query.whereEqualTo(Likes.KEY_USER, ParseUser.getCurrentUser())
         count = query.count()
-        if (count > 0) btButton.background.setTint(0x00FF00)
+        if (count > 0) btButton.background.setTint(0xFF004225.toInt())
+        else btButton.background.setTint(0xFF2196F3.toInt())
 
     }
     fun queryLikes(post: Posts) {
