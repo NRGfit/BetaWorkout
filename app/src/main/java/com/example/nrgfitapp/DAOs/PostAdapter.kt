@@ -80,15 +80,6 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         return posts.size
     }
 
-    fun getVLocationFromPost(post: Posts): Int {
-        for(i in 0..posts.size){
-            if(post == posts[i]){
-                return i
-            }
-        }
-        return -1
-    }
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvUsername: TextView
         val ivProfilePic: ImageView
@@ -139,7 +130,7 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         tvLikes.text =  "$count likes"
         query.whereEqualTo(Likes.KEY_USER, ParseUser.getCurrentUser())
         count = query.count()
-        if (count > 0) btButton.setBackgroundColor(0x00FF00)
+        if (count > 0) btButton.background.setTint(0x00FF00)
 
     }
     fun queryLikes(post: Posts) {
