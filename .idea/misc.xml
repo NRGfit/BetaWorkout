@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CS388/BetaWorkout/app/src/main/res/layout/activity_view_routine.xml" value="0.25" />
+        <entry key="..\:/CS388/BetaWorkout/app/src/main/res/layout/fragment_forum.xml" value="0.17831813576494426" />
+        <entry key="..\:/CS388/BetaWorkout/app/src/main/res/layout/fragment_routine.xml" value="0.17831813576494426" />
+        <entry key="..\:/CS388/BetaWorkout/app/src/main/res/layout/item_created_exercises.xml" value="0.17831813576494426" />
+        <entry key="..\:/CS388/BetaWorkout/app/src/main/res/layout/item_routine.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_compose.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_create_user.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Kavin Elamurugan/AndroidStudioProjects/BetaWorkout/app/src/main/res/layout/activity_login.xml" value="0.1503623188405797" />

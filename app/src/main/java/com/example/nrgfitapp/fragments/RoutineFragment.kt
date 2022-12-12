@@ -26,6 +26,7 @@ class RoutineFragment : Fragment() {
     lateinit var adapter: RoutineAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
     lateinit var btFab: FloatingActionButton
+    lateinit var btFabDel: FloatingActionButton
     var allRoutines: MutableList<UsableRoutines> = mutableListOf()
 
     val TAG = "WorkoutCreateFragment"
@@ -58,8 +59,14 @@ class RoutineFragment : Fragment() {
         );
 
         btFab = view.findViewById(R.id.createRoutine)
+        btFabDel = view.findViewById(R.id.deleteRoutine)
 
         btFab.setOnClickListener {
+            val intent = Intent(this.context, ComposeRoutineActivity::class.java)
+            Log.i(TAG, "clicked")
+            startActivityForResult(intent, REQUEST_CODE)
+        }
+        btFabDel.setOnClickListener {
             val intent = Intent(this.context, ComposeRoutineActivity::class.java)
             Log.i(TAG, "clicked")
             startActivityForResult(intent, REQUEST_CODE)

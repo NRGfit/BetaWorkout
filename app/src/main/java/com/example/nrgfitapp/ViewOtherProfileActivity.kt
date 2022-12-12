@@ -38,15 +38,10 @@ class ViewOtherProfileActivity : AppCompatActivity() {
 
         // Find all Routine objects
         query.whereEqualTo("objectId", intent.getStringExtra("User"))
-        query.findInBackground { users, e ->
-            if (e != null) {
-                Log.e(TAG, "ERROR")
-            } else {
-                if(users.size == 1){
-                    user = users[0]
-                }
-            }
-        }
+        val list = query.find()
+
+        if(list.size>0)
+            user = list[0]
 
 
         val ivProfile = findViewById<ImageView>(R.id.ivProfile)
