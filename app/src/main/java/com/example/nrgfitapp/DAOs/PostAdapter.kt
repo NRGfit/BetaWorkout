@@ -1,5 +1,6 @@
 package com.example.nrgfitapp.DAOs
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -40,6 +41,13 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
             val intent = Intent(context, ViewOtherProfileActivity::class.java)
             intent.putExtra("User", post.getUser()?.objectId)
             context.startActivity(intent)
+        }
+        holder.showPopUp.setOnMenuItemClickListener { menuItem ->
+            Log.i(TAG, "Yes works")
+            val intent = Intent(context, ViewOtherProfileActivity::class.java)
+            intent.putExtra("User", idMap[menuItem.itemId].objectId)
+            context.startActivity(intent)
+            false
         }
         if(posts[position].getUsableRoutine() != null) {
             holder.button_share.setOnClickListener {
