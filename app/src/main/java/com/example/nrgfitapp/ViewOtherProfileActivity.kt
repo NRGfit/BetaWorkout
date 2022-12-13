@@ -79,18 +79,18 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         rvPosts.layoutManager = LinearLayoutManager(this)
 
         queryPosts(user)
-        queryRoutines()
+        queryRoutines(user)
         refreshListener.onRefresh()
     }
 
-    open fun queryRoutines() {
+    open fun queryRoutines(user: ParseUser) {
         // Specify which class to query
         val query: ParseQuery<UsableRoutines> = ParseQuery.getQuery(UsableRoutines::class.java)
 
         // Find all Routine objects
         query.include(UsableRoutines.KEY_ROUTINE)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(UsableRoutines.KEY_USER, ParseUser.getCurrentUser())
+        query.whereEqualTo(UsableRoutines.KEY_USER, user)
         query.count()
         tvWorkoutCount.text = query.count().toString()
 
