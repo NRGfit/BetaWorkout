@@ -30,9 +30,8 @@ open class ProfileFragment : Fragment() {
     private var allPosts: MutableList<Posts> = mutableListOf()
     var allRoutines: MutableList<UsableRoutines> = mutableListOf()
     private lateinit var tvWorkoutCount: TextView
-
-
-
+    lateinit var tvFollows: TextView
+    lateinit var tvFollower: TextView
 
     val TAG = "ProfileFragment"
     var REQUEST_CODE = 10;
@@ -59,6 +58,24 @@ open class ProfileFragment : Fragment() {
 
 
         rvPosts = view.findViewById(R.id.feedRecyclerView)
+        tvFollows = view.findViewById(R.id.tvFollowerCount)
+        tvFollower = view.findViewById(R.id.tvFollowingCount)
+
+        val query2: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
+        query2.include(Follows.KEY_FOLLOWING)
+        query2.include(Follows.KEY_FOLLOWER)
+        query2.addDescendingOrder("createdAt")
+        query2.whereEqualTo(Follows.KEY_FOLLOWER, ParseUser.getCurrentUser())
+        var count = query2.count()
+        tvFollower.text = "$count"
+
+        val query3: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
+        query3.include(Follows.KEY_FOLLOWING)
+        query3.include(Follows.KEY_FOLLOWER)
+        query3.addDescendingOrder("createdAt")
+        query3.whereEqualTo(Follows.KEY_FOLLOWING, user)
+        var count2 = query3.count()
+        tvFollows.text = "$count2"
 
         swipeContainer = view.findViewById(R.id.swipeContainer)
 
