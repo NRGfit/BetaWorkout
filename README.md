@@ -257,10 +257,11 @@ Sprint Week 4
 - [x] Display Routines in Post
 - [x] Take someone's posted Routine
 Stretch Stories
+
 - [x] Add a delete routine button
 - [x] Add like feature for posts
 - [x] Allow users to view who liked your post and go to their page
 - [x] Add follow option
 - [x] See how many followers and following a user has
 - [x] See total workouts a user has
-- [] Add commenting to posts
+- [ ] Add commenting to posts
