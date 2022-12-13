@@ -123,9 +123,11 @@
         android:id="@+id/profileFollow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="#2196F3"
         android:text="Follow"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="94dp" />
+        app:layout_constraintBottom_toTopOf="@+id/swipeContainer"
+        app:layout_constraintStart_toEndOf="@+id/ivProfile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
