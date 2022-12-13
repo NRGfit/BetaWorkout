@@ -256,6 +256,7 @@ Sprint Week 4
 - [x] Create Routine
 - [x] Display Routines in Post
 - [x] Take someone's posted Routine
+
 Stretch Stories
 
 - [x] Add a delete routine button
