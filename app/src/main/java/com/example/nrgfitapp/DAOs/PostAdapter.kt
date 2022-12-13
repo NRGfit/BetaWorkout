@@ -1,15 +1,14 @@
 package com.example.nrgfitapp.DAOs
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -28,15 +27,27 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
         updateNumLikes(post, holder.tvLikes, holder.button_like)
+        var idMap = setLikersInPopup(holder.showPopUp, post)
         holder.bind(post)
         holder.button_like.setOnClickListener {
             queryLikes(posts[position])
             updateNumLikes(post, holder.tvLikes, holder.button_like)
+            idMap = setLikersInPopup(holder.showPopUp, post)
+        }
+        holder.tvLikes.setOnClickListener {
+            holder.showPopUp.show()
         }
         holder.ivProfilePic.setOnClickListener{
             val intent = Intent(context, ViewOtherProfileActivity::class.java)
             intent.putExtra("User", post.getUser()?.objectId)
             context.startActivity(intent)
+        }
+        holder.showPopUp.setOnMenuItemClickListener { menuItem ->
+            Log.i(TAG, "Yes works")
+            val intent = Intent(context, ViewOtherProfileActivity::class.java)
+            intent.putExtra("User", idMap[menuItem.itemId].objectId)
+            context.startActivity(intent)
+            false
         }
         if(posts[position].getUsableRoutine() != null) {
             holder.button_share.setOnClickListener {
@@ -91,6 +102,7 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         val button_like: Button
         val tvLikes: TextView
         var routines: MutableList<UsableRoutines> = mutableListOf()
+        val showPopUp: PopupMenu
 
         init{
             tvUsername = itemView.findViewById(R.id.tvUsername)
@@ -102,6 +114,11 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
             button_share = itemView.findViewById(R.id.button_share)
             button_like = itemView.findViewById(R.id.button_like)
             tvLikes = itemView.findViewById(R.id.tvLikes)
+            showPopUp = PopupMenu(
+                itemView.context,
+                tvLikes
+            )
+            showPopUp.inflate(R.menu.popup_exercises)
         }
         var TAG = "test2"
         fun bind(post: Posts){
@@ -144,23 +161,46 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
         query.addDescendingOrder("createdAt")
         query.whereEqualTo(Likes.KEY_USER, ParseUser.getCurrentUser())
         query.whereEqualTo(Likes.KEY_POST, post)
-        query.findInBackground { likes, e ->
-            if (e != null) {
-                Log.e(TAG, "ERROR")
+        val likes = query.find()
+        if (likes == null) {
+            Log.e(TAG, "ERROR")
+        } else {
+            if (likes.size == 0) {
+                Log.i(TAG, "I havent liked  it")
+                val like = Likes()
+                like.setPost(post)
+                like.setUser(ParseUser.getCurrentUser())
+                like.save()
+                Log.i(TAG, "Saved like")
             } else {
-                if (likes.size == 0) {
-                    Log.i(TAG, "I haven't liked  it")
-                    val like = Likes()
-                    like.setPost(post)
-                    like.setUser(ParseUser.getCurrentUser())
-                    like.save()
-                    Log.i(TAG, "Saved like")
-                } else {
-                    Log.i(TAG, "I have liked  it")
-                    likes[0].delete()
-                    Log.i(TAG, "Like removed")
+                Log.i(TAG, "I have liked  it")
+                likes[0].delete()
+                Log.i(TAG, "Like removed")
+            }
+        }
+
+    }
+
+    fun setLikersInPopup(popupMenu: PopupMenu, post: Posts) : MutableList<ParseUser>{
+        popupMenu.menu.clear()
+        val likerMap: MutableList<ParseUser> = mutableListOf()
+        val query: ParseQuery<Likes> = ParseQuery.getQuery(Likes::class.java)
+        query.include(Likes.KEY_USER)
+        query.include(Likes.KEY_POST)
+        query.whereEqualTo(Likes.KEY_POST, post)
+        query.findInBackground { likers, e ->
+            if (e != null) {
+                e.printStackTrace()
+                Log.e(TAG, "Error fetching posts")
+            } else {
+                if (likers != null) {
+                    for(i in 0 until likers.size){
+                        popupMenu.menu.add(Menu.NONE, i, i, likers[i].getUser()?.username)
+                        likers[i].getUser()?.let { likerMap.add(it) }
+                    }
                 }
             }
         }
+        return likerMap
     }
 }
