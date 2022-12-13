@@ -15,10 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.nrgfitapp.ComposeActivity
-import com.example.nrgfitapp.DAOs.PostAdapter
-import com.example.nrgfitapp.DAOs.Posts
-import com.example.nrgfitapp.DAOs.Routine
-import com.example.nrgfitapp.DAOs.RoutineAdapter
+import com.example.nrgfitapp.DAOs.*
 import com.example.nrgfitapp.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.parse.FindCallback
@@ -31,6 +28,10 @@ open class ProfileFragment : Fragment() {
     private lateinit var adapter: PostAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
     private var allPosts: MutableList<Posts> = mutableListOf()
+    var allRoutines: MutableList<UsableRoutines> = mutableListOf()
+    private lateinit var tvWorkoutCount: TextView
+
+
 
 
     val TAG = "ProfileFragment"
@@ -51,6 +52,7 @@ open class ProfileFragment : Fragment() {
         val user = ParseUser.getCurrentUser()
         val ivProfile = view.findViewById<ImageView>(R.id.ivProfile)
         val tvProfileUsername = view.findViewById<TextView>(R.id.tvProfileUsername)
+        tvWorkoutCount = view.findViewById(R.id.tvWorkoutCount)
 
         tvProfileUsername.text = user.username
         Glide.with(view.context).load(user.getParseFile("pfp")?.url).into(ivProfile)
@@ -77,7 +79,23 @@ open class ProfileFragment : Fragment() {
         rvPosts.layoutManager = LinearLayoutManager(requireContext())
 
         queryPosts()
+        queryRoutines()
     }
+
+    open fun queryRoutines() {
+        // Specify which class to query
+        val query: ParseQuery<UsableRoutines> = ParseQuery.getQuery(UsableRoutines::class.java)
+
+        // Find all Routine objects
+        query.include(UsableRoutines.KEY_ROUTINE)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(UsableRoutines.KEY_USER, ParseUser.getCurrentUser())
+        query.count()
+        tvWorkoutCount.text = query.count().toString()
+
+
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
