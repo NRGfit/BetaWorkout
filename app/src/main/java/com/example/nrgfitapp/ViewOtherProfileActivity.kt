@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.bumptech.glide.Glide
 import com.example.nrgfitapp.DAOs.PostAdapter
 import com.example.nrgfitapp.DAOs.Posts
+import com.example.nrgfitapp.DAOs.UsableRoutines
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
@@ -23,6 +24,8 @@ class ViewOtherProfileActivity : AppCompatActivity() {
     private lateinit var adapter: PostAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
     private var allPosts: MutableList<Posts> = mutableListOf()
+    private lateinit var tvWorkoutCount: TextView
+
 
     val TAG = "OtherProfileActivity"
     var REQUEST_CODE = 10;
@@ -52,6 +55,8 @@ class ViewOtherProfileActivity : AppCompatActivity() {
 
         rvPosts = findViewById(R.id.feedRecyclerView)
 
+        tvWorkoutCount = findViewById(R.id.tvWorkoutCount)
+
         swipeContainer = findViewById(R.id.swipeContainer)
 
         val refreshListener = OnRefreshListener {
@@ -74,8 +79,25 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         rvPosts.layoutManager = LinearLayoutManager(this)
 
         queryPosts(user)
+        queryRoutines()
         refreshListener.onRefresh()
     }
+
+    open fun queryRoutines() {
+        // Specify which class to query
+        val query: ParseQuery<UsableRoutines> = ParseQuery.getQuery(UsableRoutines::class.java)
+
+        // Find all Routine objects
+        query.include(UsableRoutines.KEY_ROUTINE)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(UsableRoutines.KEY_USER, ParseUser.getCurrentUser())
+        query.count()
+        tvWorkoutCount.text = query.count().toString()
+
+
+    }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
