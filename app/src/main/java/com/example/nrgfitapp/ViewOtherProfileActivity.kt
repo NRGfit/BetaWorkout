@@ -26,6 +26,8 @@ class ViewOtherProfileActivity : AppCompatActivity() {
     private lateinit var tvWorkoutCount: TextView
     lateinit var profileFollow: Button
     lateinit var tvFollows: TextView
+    lateinit var tvFollower: TextView
+
 
     val TAG = "OtherProfileActivity"
     var REQUEST_CODE = 10;
@@ -57,6 +59,16 @@ class ViewOtherProfileActivity : AppCompatActivity() {
 
         tvWorkoutCount = findViewById(R.id.tvWorkoutCount)
         tvFollows = findViewById(R.id.tvFollowerCount)
+        tvFollower = findViewById(R.id.tvFollowingCount)
+
+        val query2: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
+        query2.include(Follows.KEY_FOLLOWING)
+        query2.include(Follows.KEY_FOLLOWER)
+        query2.addDescendingOrder("createdAt")
+        query2.whereEqualTo(Follows.KEY_FOLLOWER, user)
+        var count = query2.count()
+        tvFollower.text =  "$count"
+
         swipeContainer = findViewById(R.id.swipeContainer)
 
         profileFollow = findViewById(R.id.profileFollow)
