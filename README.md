@@ -247,3 +247,12 @@ Sprint Week 3
 - [x] Gif Demonstration
 - [x] Display Routines
 - [x] Display individual exercises
+
+Sprint Week 4
+
+<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+- [x] Adjust Parse Database for Routine functions
+- [x] Create Routine
+- [x] Display Routines in Post
+- [x] Take someone's posted Routine
