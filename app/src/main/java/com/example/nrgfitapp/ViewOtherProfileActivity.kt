@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.bumptech.glide.Glide
-import com.example.nrgfitapp.DAOs.PostAdapter
-import com.example.nrgfitapp.DAOs.Posts
-import com.example.nrgfitapp.DAOs.UsableRoutines
+import com.example.nrgfitapp.DAOs.*
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
@@ -25,7 +24,7 @@ class ViewOtherProfileActivity : AppCompatActivity() {
     lateinit var swipeContainer: SwipeRefreshLayout
     private var allPosts: MutableList<Posts> = mutableListOf()
     private lateinit var tvWorkoutCount: TextView
-
+    lateinit var profileFollow: Button
 
     val TAG = "OtherProfileActivity"
     var REQUEST_CODE = 10;
@@ -58,6 +57,36 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         tvWorkoutCount = findViewById(R.id.tvWorkoutCount)
 
         swipeContainer = findViewById(R.id.swipeContainer)
+
+        profileFollow = findViewById(R.id.profileFollow)
+        profileFollow.setOnClickListener{
+            // Specify which class to query
+            val query: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
+
+            // Find all Routine objects
+            query.include(Follows.KEY_FOLLOWER)
+            query.include(Follows.KEY_FOLLOWING)
+            query.addDescendingOrder("createdAt")
+            query.whereEqualTo(Follows.KEY_FOLLOWER, ParseUser.getCurrentUser())
+            query.whereEqualTo(Follows.KEY_FOLLOWING, user)
+            val follows = query.find()
+            if (follows == null) {
+                Log.e(TAG, "ERROR")
+            } else {
+                if (follows.size == 0) {
+                    Log.i(TAG, "I haven't followed it")
+                    val follow = Follows()
+                    follow.setFollowing(user)
+                    follow.setFollower(ParseUser.getCurrentUser())
+                    follow.save()
+                    Log.i(TAG, "Saved follow")
+                } else {
+                    Log.i(TAG, "I have followed it")
+                    follows[0].delete()
+                    Log.i(TAG, "Unfollowed")
+                }
+            }
+        }
 
         val refreshListener = OnRefreshListener {
             queryPosts(user)
