@@ -25,6 +25,7 @@ class ViewOtherProfileActivity : AppCompatActivity() {
     private var allPosts: MutableList<Posts> = mutableListOf()
     private lateinit var tvWorkoutCount: TextView
     lateinit var profileFollow: Button
+    lateinit var tvFollows: TextView
 
     val TAG = "OtherProfileActivity"
     var REQUEST_CODE = 10;
@@ -55,10 +56,11 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         rvPosts = findViewById(R.id.feedRecyclerView)
 
         tvWorkoutCount = findViewById(R.id.tvWorkoutCount)
-
+        tvFollows = findViewById(R.id.tvFollowerCount)
         swipeContainer = findViewById(R.id.swipeContainer)
 
         profileFollow = findViewById(R.id.profileFollow)
+        updateFollowsButton(profileFollow, user, tvFollows)
         profileFollow.setOnClickListener{
             // Specify which class to query
             val query: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
@@ -85,6 +87,7 @@ class ViewOtherProfileActivity : AppCompatActivity() {
                     follows[0].delete()
                     Log.i(TAG, "Unfollowed")
                 }
+                updateFollowsButton(profileFollow, user, tvFollows)
             }
         }
 
@@ -137,6 +140,25 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    open fun updateFollowsButton(profileFollow: Button, user: ParseUser, tvFollows: TextView) {
+        val query: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
+        query.include(Follows.KEY_FOLLOWING)
+        query.include(Follows.KEY_FOLLOWER)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(Follows.KEY_FOLLOWING, user)
+        var count = query.count()
+        tvFollows.text =  "$count"
+        query.whereEqualTo(Follows.KEY_FOLLOWER, ParseUser.getCurrentUser())
+        count = query.count()
+        if (count > 0) {
+            profileFollow.background.setTint(0xFF004225.toInt())
+
+        }
+        else {
+            profileFollow.background.setTint(0xFF2196F3.toInt())
+        }
+
+    }
     open fun queryPosts(user:ParseUser) {
         // Specify which class to query
         val query: ParseQuery<Posts> = ParseQuery.getQuery(Posts::class.java)
@@ -159,4 +181,5 @@ class ViewOtherProfileActivity : AppCompatActivity() {
             }
         }
     }
+
 }
