@@ -83,14 +83,17 @@ open class ForumFragment : Fragment() {
     }
 
     open fun queryPosts() {
+
+        // Specify which class to query
         val query: ParseQuery<Posts> = ParseQuery.getQuery(Posts::class.java)
+
+        // Find all Post objects
         query.include(Posts.KEY_USER)
         query.include(Posts.KEY_USABLE_ROUTINE)
         query.addDescendingOrder("createdAt")
         query.findInBackground { posts, e ->
             if (e != null) {
-                e.printStackTrace()
-                Log.e(TAG, "Error fetching posts")
+                Log.e(TAG, "ERROR")
             } else {
                 if (posts != null) {
                     allPosts.clear()

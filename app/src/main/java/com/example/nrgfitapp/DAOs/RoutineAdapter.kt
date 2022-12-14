@@ -24,13 +24,8 @@ class RoutineAdapter(val context: Context, val routines: List<UsableRoutines>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val routine = routines.get(position)
+        val routine = routines[position]
         holder.bind(routine)
-        holder.clRoutine.setOnClickListener{
-            val intent = Intent(context, ViewRoutineActivity::class.java)
-            intent.putExtra("routineID", routine.getRoutine()?.objectId)
-            context.startActivity(intent)
-        }
     }
 
     override fun getItemCount(): Int {
@@ -73,6 +68,12 @@ class RoutineAdapter(val context: Context, val routines: List<UsableRoutines>) :
                         }
                     }
                 }
+            }
+
+            clRoutine.setOnClickListener{
+                val intent = Intent(itemView.context, ViewRoutineActivity::class.java)
+                intent.putExtra("routineID", usableRoutine.getRoutine()?.objectId)
+                itemView.context.startActivity(intent)
             }
         }
     }
