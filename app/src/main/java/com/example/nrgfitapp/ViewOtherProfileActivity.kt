@@ -67,7 +67,7 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         query2.addDescendingOrder("createdAt")
         query2.whereEqualTo(Follows.KEY_FOLLOWER, user)
         var count = query2.count()
-        tvFollower.text =  "$count"
+        tvFollower.text = "$count"
 
         swipeContainer = findViewById(R.id.swipeContainer)
 
