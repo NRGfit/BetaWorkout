@@ -171,14 +171,14 @@ open class ProfileFragment : Fragment() {
         }
     }
 
-    fun setFollowsInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
+    fun setFollowersInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
         popupMenu.menu.clear()
         val FollowsMap: MutableList<ParseUser> = mutableListOf()
         val query: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
         query.include(Follows.KEY_FOLLOWING)
         query.include(Follows.KEY_FOLLOWER)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(Follows.KEY_FOLLOWER, ParseUser.getCurrentUser())
+        query.whereEqualTo(Follows.KEY_FOLLOWER, user)
 
         query.findInBackground { follower, e ->
             if (e != null) {
@@ -190,21 +190,21 @@ open class ProfileFragment : Fragment() {
                         popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollowing()?.username)
                         follower[i].getFollowing()?.let { FollowsMap.add(it) }
                     }
-                    tvFollows.text = follower.size.toString()
+                    tvFollower.text = follower.size.toString()
                 }
             }
         }
         return FollowsMap
     }
 
-    fun setFollowersInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
+    fun setFollowsInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
         popupMenu.menu.clear()
         val FollowsMap: MutableList<ParseUser> = mutableListOf()
         val query: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
         query.include(Follows.KEY_FOLLOWING)
         query.include(Follows.KEY_FOLLOWER)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(Follows.KEY_FOLLOWING, ParseUser.getCurrentUser())
+        query.whereEqualTo(Follows.KEY_FOLLOWING, user)
 
         query.findInBackground { follower, e ->
             if (e != null) {
@@ -216,7 +216,7 @@ open class ProfileFragment : Fragment() {
                         popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollower()?.username)
                         follower[i].getFollower()?.let { FollowsMap.add(it) }
                     }
-                    tvFollower.text = follower.size.toString()
+                    tvFollows.text = follower.size.toString()
                 }
             }
         }
