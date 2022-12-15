@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -59,6 +61,18 @@ open class ProfileFragment : Fragment() {
         rvPosts = view.findViewById(R.id.feedRecyclerView)
         tvFollows = view.findViewById(R.id.tvFollowerCount)
         tvFollower = view.findViewById(R.id.tvFollowingCount)
+
+        val showPopUpFollows = PopupMenu(
+            requireContext(),
+            tvFollows
+        )
+        showPopUpFollows.inflate(R.menu.popup_exercises)
+
+        val showPopUpFollower = PopupMenu(
+            requireContext(),
+            tvFollower
+        )
+        showPopUpFollower.inflate(R.menu.popup_exercises)
 
         val query2: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
         query2.include(Follows.KEY_FOLLOWING)
@@ -144,5 +158,55 @@ open class ProfileFragment : Fragment() {
                 }
             }
         }
+    }
+    fun setFollowsInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
+        popupMenu.menu.clear()
+        val FollowsMap: MutableList<ParseUser> = mutableListOf()
+        val query: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
+        query.include(Follows.KEY_FOLLOWING)
+        query.include(Follows.KEY_FOLLOWER)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(Follows.KEY_FOLLOWER, ParseUser.getCurrentUser())
+
+        query.findInBackground { follower, e ->
+            if (e != null) {
+                e.printStackTrace()
+                Log.e(TAG, "Error fetching follows")
+            } else {
+                if (follower != null) {
+                    for(i in 0 until follower.size){
+                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollower()?.username)
+                        follower[i].getFollower()?.let { FollowsMap.add(it) }
+                    }
+                    tvFollower.text = follower.size.toString()
+                }
+            }
+        }
+        return FollowsMap
+    }
+    fun setFollowersInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
+        popupMenu.menu.clear()
+        val FollowsMap: MutableList<ParseUser> = mutableListOf()
+        val query: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
+        query.include(Follows.KEY_FOLLOWING)
+        query.include(Follows.KEY_FOLLOWER)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(Follows.KEY_FOLLOWER, ParseUser.getCurrentUser())
+
+        query.findInBackground { follower, e ->
+            if (e != null) {
+                e.printStackTrace()
+                Log.e(TAG, "Error fetching follows")
+            } else {
+                if (follower != null) {
+                    for(i in 0 until follower.size){
+                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollower()?.username)
+                        follower[i].getFollower()?.let { FollowsMap.add(it) }
+                    }
+                    tvFollower.text = follower.size.toString()
+                }
+            }
+        }
+        return FollowsMap
     }
 }
