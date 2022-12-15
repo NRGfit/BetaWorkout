@@ -94,10 +94,10 @@ class ViewOtherProfileActivity : AppCompatActivity() {
             false
         }
 
-        tvFollows.setOnClickListener {
+        tvFollower.setOnClickListener {
             showPopUpFollows.show()
         }
-        tvFollower.setOnClickListener {
+        tvFollows.setOnClickListener {
             showPopUpFollower.show()
         }
 
@@ -132,9 +132,7 @@ class ViewOtherProfileActivity : AppCompatActivity() {
                     Log.i(TAG, "Unfollowed")
                 }
                 updateFollowsButton(profileFollow, user, tvFollows)
-
                 setFollowersInPopup(showPopUpFollower, user)
-
             }
         }
 
@@ -235,7 +233,7 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         query.include(Follows.KEY_FOLLOWING)
         query.include(Follows.KEY_FOLLOWER)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(Follows.KEY_FOLLOWER, user)
+        query.whereEqualTo(Follows.KEY_FOLLOWING, user)
 
         query.findInBackground { follower, e ->
             if (e != null) {
@@ -244,10 +242,10 @@ class ViewOtherProfileActivity : AppCompatActivity() {
             } else {
                 if (follower != null) {
                     for(i in 0 until follower.size){
-                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollowing()?.username)
+                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollower()?.username)
                         follower[i].getFollowing()?.let { FollowsMap.add(it) }
                     }
-                    tvFollower.text = follower.size.toString()
+                    tvFollows.text = follower.size.toString()
                 }
             }
         }
@@ -261,7 +259,7 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         query.include(Follows.KEY_FOLLOWING)
         query.include(Follows.KEY_FOLLOWER)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(Follows.KEY_FOLLOWING, user)
+        query.whereEqualTo(Follows.KEY_FOLLOWER, user)
 
         query.findInBackground { follower, e ->
             if (e != null) {
@@ -270,10 +268,10 @@ class ViewOtherProfileActivity : AppCompatActivity() {
             } else {
                 if (follower != null) {
                     for(i in 0 until follower.size){
-                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollower()?.username)
+                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollowing()?.username)
                         follower[i].getFollower()?.let { FollowsMap.add(it) }
                     }
-                    tvFollows.text = follower.size.toString()
+                    tvFollower.text = follower.size.toString()
                 }
             }
         }

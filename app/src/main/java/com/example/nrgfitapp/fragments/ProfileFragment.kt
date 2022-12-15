@@ -82,7 +82,7 @@ open class ProfileFragment : Fragment() {
             Log.i(TAG, "Yes works")
             val intent = Intent(requireContext(), ViewOtherProfileActivity::class.java)
             intent.putExtra("User", followsMap[menuItem.itemId].objectId)
-            requireContext().startActivity(intent)
+            this.startActivity(intent)
             false
         }
 
@@ -90,14 +90,14 @@ open class ProfileFragment : Fragment() {
             Log.i(TAG, "Yes works")
             val intent = Intent(requireContext(), ViewOtherProfileActivity::class.java)
             intent.putExtra("User", followersMap[menuItem.itemId].objectId)
-            requireContext().startActivity(intent)
+            this.startActivity(intent)
             false
         }
 
-        tvFollows.setOnClickListener {
+        tvFollower.setOnClickListener {
             showPopUpFollows.show()
         }
-        tvFollower.setOnClickListener {
+        tvFollows.setOnClickListener {
             showPopUpFollower.show()
         }
 
@@ -178,7 +178,7 @@ open class ProfileFragment : Fragment() {
         query.include(Follows.KEY_FOLLOWING)
         query.include(Follows.KEY_FOLLOWER)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(Follows.KEY_FOLLOWER, user)
+        query.whereEqualTo(Follows.KEY_FOLLOWING, user)
 
         query.findInBackground { follower, e ->
             if (e != null) {
@@ -187,10 +187,10 @@ open class ProfileFragment : Fragment() {
             } else {
                 if (follower != null) {
                     for(i in 0 until follower.size){
-                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollowing()?.username)
+                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollower()?.username)
                         follower[i].getFollowing()?.let { FollowsMap.add(it) }
                     }
-                    tvFollower.text = follower.size.toString()
+                    tvFollows.text = follower.size.toString()
                 }
             }
         }
@@ -204,7 +204,7 @@ open class ProfileFragment : Fragment() {
         query.include(Follows.KEY_FOLLOWING)
         query.include(Follows.KEY_FOLLOWER)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(Follows.KEY_FOLLOWING, user)
+        query.whereEqualTo(Follows.KEY_FOLLOWER, user)
 
         query.findInBackground { follower, e ->
             if (e != null) {
@@ -213,10 +213,10 @@ open class ProfileFragment : Fragment() {
             } else {
                 if (follower != null) {
                     for(i in 0 until follower.size){
-                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollower()?.username)
+                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollowing()?.username)
                         follower[i].getFollower()?.let { FollowsMap.add(it) }
                     }
-                    tvFollows.text = follower.size.toString()
+                    tvFollower.text = follower.size.toString()
                 }
             }
         }
