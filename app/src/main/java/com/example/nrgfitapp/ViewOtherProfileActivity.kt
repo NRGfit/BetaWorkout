@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,13 +63,43 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         tvFollows = findViewById(R.id.tvFollowerCount)
         tvFollower = findViewById(R.id.tvFollowingCount)
 
-        val query2: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
-        query2.include(Follows.KEY_FOLLOWING)
-        query2.include(Follows.KEY_FOLLOWER)
-        query2.addDescendingOrder("createdAt")
-        query2.whereEqualTo(Follows.KEY_FOLLOWER, user)
-        var count = query2.count()
-        tvFollower.text = "$count"
+        val showPopUpFollows = PopupMenu(
+            this,
+            tvFollows
+        )
+        showPopUpFollows.inflate(R.menu.popup_exercises)
+
+        val showPopUpFollower = PopupMenu(
+            this,
+            tvFollower
+        )
+        showPopUpFollower.inflate(R.menu.popup_exercises)
+
+        var followsMap = setFollowsInPopup(showPopUpFollows, user)
+        var followersMap = setFollowersInPopup(showPopUpFollower, user)
+
+        showPopUpFollows.setOnMenuItemClickListener { menuItem ->
+            Log.i(TAG, "Yes works")
+            val intent = Intent(this, ViewOtherProfileActivity::class.java)
+            intent.putExtra("User", followsMap[menuItem.itemId].objectId)
+            this.startActivity(intent)
+            false
+        }
+
+        showPopUpFollower.setOnMenuItemClickListener { menuItem ->
+            Log.i(TAG, "Yes works")
+            val intent = Intent(this, ViewOtherProfileActivity::class.java)
+            intent.putExtra("User", followersMap[menuItem.itemId].objectId)
+            this.startActivity(intent)
+            false
+        }
+
+        tvFollows.setOnClickListener {
+            showPopUpFollows.show()
+        }
+        tvFollower.setOnClickListener {
+            showPopUpFollower.show()
+        }
 
         swipeContainer = findViewById(R.id.swipeContainer)
 
@@ -192,6 +224,57 @@ class ViewOtherProfileActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    fun setFollowsInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
+        popupMenu.menu.clear()
+        val FollowsMap: MutableList<ParseUser> = mutableListOf()
+        val query: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
+        query.include(Follows.KEY_FOLLOWING)
+        query.include(Follows.KEY_FOLLOWER)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(Follows.KEY_FOLLOWER, ParseUser.getCurrentUser())
+
+        query.findInBackground { follower, e ->
+            if (e != null) {
+                e.printStackTrace()
+                Log.e(TAG, "Error fetching follows")
+            } else {
+                if (follower != null) {
+                    for(i in 0 until follower.size){
+                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollowing()?.username)
+                        follower[i].getFollowing()?.let { FollowsMap.add(it) }
+                    }
+                    tvFollows.text = follower.size.toString()
+                }
+            }
+        }
+        return FollowsMap
+    }
+
+    fun setFollowersInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
+        popupMenu.menu.clear()
+        val FollowsMap: MutableList<ParseUser> = mutableListOf()
+        val query: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
+        query.include(Follows.KEY_FOLLOWING)
+        query.include(Follows.KEY_FOLLOWER)
+        query.addDescendingOrder("createdAt")
+        query.whereEqualTo(Follows.KEY_FOLLOWING, ParseUser.getCurrentUser())
+
+        query.findInBackground { follower, e ->
+            if (e != null) {
+                e.printStackTrace()
+                Log.e(TAG, "Error fetching follows")
+            } else {
+                if (follower != null) {
+                    for(i in 0 until follower.size){
+                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollower()?.username)
+                        follower[i].getFollower()?.let { FollowsMap.add(it) }
+                    }
+                    tvFollower.text = follower.size.toString()
+                }
+            }
+        }
+        return FollowsMap
     }
 
 }
