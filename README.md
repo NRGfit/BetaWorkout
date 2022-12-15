@@ -1,5 +1,9 @@
 # BetaWorkout
 
+Final Gif
+
+<img src='NRGfitFINAL.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 Description
 
 Workout app that allow for you to plan sessions and view other people's sessions in a fourm like manner. Potentially allow people to discuss and talk on the forum stye app to talk about form, workouts, etc.
