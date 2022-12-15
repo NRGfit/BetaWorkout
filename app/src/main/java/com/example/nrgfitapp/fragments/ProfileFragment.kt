@@ -9,8 +9,8 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
-import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.example.nrgfitapp.ComposeActivity
 import com.example.nrgfitapp.DAOs.*
 import com.example.nrgfitapp.R
+import com.example.nrgfitapp.ViewOtherProfileActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.parse.FindCallback
 import com.parse.ParseException
@@ -74,21 +75,31 @@ open class ProfileFragment : Fragment() {
         )
         showPopUpFollower.inflate(R.menu.popup_exercises)
 
-        val query2: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
-        query2.include(Follows.KEY_FOLLOWING)
-        query2.include(Follows.KEY_FOLLOWER)
-        query2.addDescendingOrder("createdAt")
-        query2.whereEqualTo(Follows.KEY_FOLLOWER, ParseUser.getCurrentUser())
-        var count = query2.count()
-        tvFollower.text = "$count"
+        var followsMap = setFollowsInPopup(showPopUpFollows, user)
+        var followersMap = setFollowersInPopup(showPopUpFollower, user)
 
-        val query3: ParseQuery<Follows> = ParseQuery.getQuery(Follows::class.java)
-        query3.include(Follows.KEY_FOLLOWING)
-        query3.include(Follows.KEY_FOLLOWER)
-        query3.addDescendingOrder("createdAt")
-        query3.whereEqualTo(Follows.KEY_FOLLOWING, user)
-        var count2 = query3.count()
-        tvFollows.text = "$count2"
+        showPopUpFollows.setOnMenuItemClickListener { menuItem ->
+            Log.i(TAG, "Yes works")
+            val intent = Intent(requireContext(), ViewOtherProfileActivity::class.java)
+            intent.putExtra("User", followsMap[menuItem.itemId].objectId)
+            requireContext().startActivity(intent)
+            false
+        }
+
+        showPopUpFollower.setOnMenuItemClickListener { menuItem ->
+            Log.i(TAG, "Yes works")
+            val intent = Intent(requireContext(), ViewOtherProfileActivity::class.java)
+            intent.putExtra("User", followersMap[menuItem.itemId].objectId)
+            requireContext().startActivity(intent)
+            false
+        }
+
+        tvFollows.setOnClickListener {
+            showPopUpFollows.show()
+        }
+        tvFollower.setOnClickListener {
+            showPopUpFollower.show()
+        }
 
         swipeContainer = view.findViewById(R.id.swipeContainer)
 
@@ -159,6 +170,7 @@ open class ProfileFragment : Fragment() {
             }
         }
     }
+
     fun setFollowsInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
         popupMenu.menu.clear()
         val FollowsMap: MutableList<ParseUser> = mutableListOf()
@@ -175,15 +187,16 @@ open class ProfileFragment : Fragment() {
             } else {
                 if (follower != null) {
                     for(i in 0 until follower.size){
-                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollower()?.username)
-                        follower[i].getFollower()?.let { FollowsMap.add(it) }
+                        popupMenu.menu.add(Menu.NONE, i, i, follower[i].getFollowing()?.username)
+                        follower[i].getFollowing()?.let { FollowsMap.add(it) }
                     }
-                    tvFollower.text = follower.size.toString()
+                    tvFollows.text = follower.size.toString()
                 }
             }
         }
         return FollowsMap
     }
+
     fun setFollowersInPopup(popupMenu: android.widget.PopupMenu, user: ParseUser) : MutableList<ParseUser>{
         popupMenu.menu.clear()
         val FollowsMap: MutableList<ParseUser> = mutableListOf()
@@ -191,7 +204,7 @@ open class ProfileFragment : Fragment() {
         query.include(Follows.KEY_FOLLOWING)
         query.include(Follows.KEY_FOLLOWER)
         query.addDescendingOrder("createdAt")
-        query.whereEqualTo(Follows.KEY_FOLLOWER, ParseUser.getCurrentUser())
+        query.whereEqualTo(Follows.KEY_FOLLOWING, ParseUser.getCurrentUser())
 
         query.findInBackground { follower, e ->
             if (e != null) {
