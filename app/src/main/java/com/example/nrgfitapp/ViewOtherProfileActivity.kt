@@ -197,10 +197,11 @@ class ViewOtherProfileActivity : AppCompatActivity() {
         count = query.count()
         if (count > 0) {
             profileFollow.background.setTint(0xFF004225.toInt())
-
+            profileFollow.text = "Following"
         }
         else {
             profileFollow.background.setTint(0xFF2196F3.toInt())
+            profileFollow.text = "Follow"
         }
 
     }
