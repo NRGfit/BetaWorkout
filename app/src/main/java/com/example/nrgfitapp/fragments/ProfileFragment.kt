@@ -114,7 +114,7 @@ open class ProfileFragment : Fragment() {
             android.R.color.holo_red_light
         );
 
-        adapter = PostAdapter(requireContext(), allPosts)
+        adapter = PostAdapter(requireContext(), allPosts, false)
 
         rvPosts.adapter = adapter
         rvPosts.layoutManager = LinearLayoutManager(requireContext())

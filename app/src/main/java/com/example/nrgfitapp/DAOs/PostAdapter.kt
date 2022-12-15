@@ -9,15 +9,19 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.nrgfitapp.MainActivity
 import com.example.nrgfitapp.R
 import com.example.nrgfitapp.ViewOtherProfileActivity
+import com.example.nrgfitapp.fragments.ForumFragment
+import com.example.nrgfitapp.fragments.ProfileFragment
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
-class PostAdapter(val context: Context, private val posts: List<Posts>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+class PostAdapter(val context: Context, private val posts: List<Posts>, val fromForum: Boolean=false) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
     val TAG = "PostAdapter"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false)
@@ -26,7 +30,7 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
-        holder.bind(post)
+        holder.bind(post, fromForum)
     }
 
     override fun getItemCount(): Int {
@@ -67,7 +71,7 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
 
         }
         var TAG = "test2"
-        fun bind(post: Posts){
+        fun bind(post: Posts, fromForum: Boolean){
             tvUsername.text = post.getUser()?.username
             tvDescription.text = post.getDescription()
             itemCreatedAt.text = post.getFormattedTimestamp(post.createdAt)
@@ -96,10 +100,20 @@ class PostAdapter(val context: Context, private val posts: List<Posts>) : Recycl
                 showPopUp.show()
             }
 
-            ivProfilePic.setOnClickListener{
-                val intent = Intent(itemView.context, ViewOtherProfileActivity::class.java)
-                intent.putExtra("User", post.getUser()?.objectId)
-                itemView.context.startActivity(intent)
+            if(fromForum) {
+                if (post.getUser()?.objectId == ParseUser.getCurrentUser().objectId) {
+                    val supportFragmentManager = (itemView.context as MainActivity).supportFragmentManager
+                    ivProfilePic.setOnClickListener {
+                        supportFragmentManager.beginTransaction().replace(R.id.frameContainer, ProfileFragment())
+                            .commit()
+                    }
+                } else {
+                    ivProfilePic.setOnClickListener {
+                        val intent = Intent(itemView.context, ViewOtherProfileActivity::class.java)
+                        intent.putExtra("User", post.getUser()?.objectId)
+                        itemView.context.startActivity(intent)
+                    }
+                }
             }
 
             showPopUp.setOnMenuItemClickListener { menuItem ->

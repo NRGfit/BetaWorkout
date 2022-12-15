@@ -66,7 +66,7 @@ open class ForumFragment : Fragment() {
             startActivityForResult(intent, REQUEST_CODE)
         }
 
-        adapter = PostAdapter(requireContext(), allPosts)
+        adapter = PostAdapter(requireContext(), allPosts, true)
         rvPosts.adapter = adapter
         rvPosts.layoutManager = LinearLayoutManager(requireContext())
 

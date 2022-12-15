@@ -28,7 +28,6 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val routineExercise = exercises.get(position)
         holder.bind(routineExercise)
-        holder.index = position
         holder.btDelete.setOnClickListener {
             exercises.removeAt(position)
             notifyItemRemoved(position)
@@ -51,7 +50,6 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableL
         val tvExerciseWeights: EditText
         val tvExerciseNotes: EditText
         val btDelete: Button
-        var index: Int
 
         init{
             tvExerciseName = itemView.findViewById(R.id.exerciseName)
@@ -61,7 +59,6 @@ class RoutineCreateExerciseAdapter(val context: Context, val exercises: MutableL
             tvExerciseWeights = itemView.findViewById(R.id.exerciseWeights)
             tvExerciseNotes = itemView.findViewById(R.id.exerciseNotes)
             btDelete = itemView.findViewById<Button>(R.id.btDelete)
-            index = -1
         }
 
         var TAG = "test2"

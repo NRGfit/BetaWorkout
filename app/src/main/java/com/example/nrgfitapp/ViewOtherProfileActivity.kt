@@ -150,7 +150,7 @@ class ViewOtherProfileActivity : AppCompatActivity() {
             android.R.color.holo_red_light
         );
 
-        adapter = PostAdapter(this, allPosts)
+        adapter = PostAdapter(this, allPosts, false)
 
         rvPosts.adapter = adapter
         rvPosts.layoutManager = LinearLayoutManager(this)
